@@ -1,0 +1,98 @@
+@CHARSET "UTF-8";
+
+body
+{
+	background-color: #53c1d7;
+	color: white;
+	margin: 0 !important;
+}
+.header
+{
+	background-color: #3e97ca;
+	height: 60px;
+	color: black;
+	width: 100%;
+	position: absolute;
+}
+.header .logo
+{
+	float: left;
+	font-size: 40px;
+	margin: 5px auto 5px 30px;
+	width: 200px;
+	text-align: center;
+	font-family: Georgia;
+}
+.header .signin
+{
+	background: #ffffff;
+	background-image: linear-gradient(to bottom, #ffffff, #9fb6c4);
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 28px;
+	border: solid #1f628d 2px;
+	text-shadow: 1px 1px 3px #f0e8f0;
+	font-family: Georgia;
+	color: #0a010a;
+	font-size: 15px;
+	text-decoration: none;
+  	right: 0;
+  	width: 100px;
+  	position: fixed;
+ 	margin: 10px 10px 10px 10px;
+ 	height: 40px;
+ 	text-align: center;
+ 	float: right;
+}
+
+.header .signin:hover 
+{
+  	background: #3cb0fd;
+  	background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  	background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  	background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  	background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  	background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+ 	text-decoration: none;
+}
+
+.header .login
+{
+	
+	background: #ffffff;
+	background-image: linear-gradient(to bottom, #ffffff, #9fb6c4);
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 28px;
+	border: solid #1f628d 2px;
+	text-shadow: 1px 1px 3px #f0e8f0;
+	font-family: Georgia;
+	color: #0a010a;
+	font-size: 15px;
+	text-decoration: none;
+  	right: 105px;
+  	width: 100px;
+  	position: fixed;
+	float: right;
+	clear: both;
+ 	margin: 10px 10px 10px 10px;
+ 	height: 40px;
+ 	text-align: center;
+}
+
+.header .login:hover 
+{
+  	background: #3cb0fd;
+  	background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  	background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  	background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  	background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  	background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+ 	text-decoration: none;
+}
+.container
+{
+	font-family: Verdana;
+	font-size: 20px;
+}
+
