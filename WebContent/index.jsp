@@ -13,8 +13,9 @@
 		<div class="container">
 			<div class="header">
 				<div class="logo">SAISP.pl</div>
-				
+				<form action="register.jsp">
 				<input type="submit" class="signin" value="Sign in"/>
+				</form>
 				<form action="login.jsp">
 				<input type="submit" class="login" value="Log in"/>
 				</form>

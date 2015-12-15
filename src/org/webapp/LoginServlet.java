@@ -6,8 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.webapp.serwis.LogRegService;
 
-import org.webapp.serwis.LoginService;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet 
@@ -15,22 +15,25 @@ public class LoginServlet extends HttpServlet
 	private static final long serialVersionUID = 1L;
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		String userId, password;
-		
 		userId = request.getParameter("userId");
 		password = request.getParameter("password");
+		System.out.println(userId+" "+password+"\n" );
+		LogRegService loginserwis = new LogRegService();
 		
-		LoginService loginserwis = new LoginService();
-		boolean wynik = loginserwis.autoryzacja(userId, password);
-		if(wynik)
+		
+		if(loginserwis.zaloguj(userId, password))
 		{
-			response.sendRedirect("success.jsp");
+			response.sendRedirect("index.jsp");
+			System.out.println("sukces" );
 			return;
 		}
 		else
 		{
 			response.sendRedirect("login.jsp");
+			
 			return;
 		}
 	}
