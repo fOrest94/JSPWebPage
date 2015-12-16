@@ -3,8 +3,8 @@ package org.webapp.serwis;
 
 public class LogRegService 
 {
-	
-	public void sprawdzSterownik(boolean sterownik)
+	boolean sprawdz;
+	/*public void sprawdzSterownik(boolean sterownik)
 	{
 		if(sterownik)
 		{
@@ -33,17 +33,41 @@ public class LogRegService
 			return true;
 		}
 		return false;
-	}
+	}*/
 	
-	public boolean zarejestruj(String imie, String nazwisko, String login, String haslo, String email)
+	public boolean rejestrujSpecjalistow(String imie, String nazwisko, String login, String haslo, String email, String specjalizacja, String miasto)
 	{
-		String rejestruj = "insert into uzytkownicy values("+imie+","+nazwisko+","+login+","+email+");";
+		String rejestruj = "insert into lekarze values('"+imie+"','"+nazwisko+"','"+login+"','"+haslo+"','"+email+"','"+specjalizacja+"','"+miasto+"');";
+		System.out.println(rejestruj);
 		Database baza = new Database();
-		
-		if(baza.dodajUzytkownika(baza.statement, rejestruj))
+		sprawdz = baza.dodajUzytkownika(baza.statement, rejestruj);
+		if(sprawdz)
 		{
 			return true;
 		}
-		return false;
+		else
+		{
+			System.out.println("rejestrujPacjentow false");
+			return false;
+		}
+		
+	}
+	public boolean rejestrujPacjentow(String imie, String nazwisko, String login, String haslo, String email)
+	{
+		String rejestruj = "insert into uzytkownicy values('"+imie+"','"+nazwisko+"','"+login+"','"+haslo+"','"+email+"');";
+		System.out.println(rejestruj);
+		Database baza = new Database();
+		
+		sprawdz = baza.dodajUzytkownika(baza.statement, rejestruj);
+		if(sprawdz)
+		{
+			return true;
+		}
+		else
+		{
+			System.out.println("rejestrujPacjentow false");
+			return false;
+		}
+		
 	}
 }

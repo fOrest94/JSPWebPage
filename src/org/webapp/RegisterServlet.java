@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.webapp.serwis.LogRegService;
 
 
-@WebServlet("/login")
+@WebServlet(urlPatterns ={"/registerMedic", "/registerUser"})
+
 public class RegisterServlet extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
@@ -18,7 +19,7 @@ public class RegisterServlet extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String userId, password, name, surname, email;
+		String userId, password, name, surname, email, specjalizacja, miasto;
 		userId = request.getParameter("userId");
 		password = request.getParameter("password");
 		name = request.getParameter("imie");
@@ -26,20 +27,45 @@ public class RegisterServlet extends HttpServlet
 		email = request.getParameter("email");
 		System.out.println(userId+" "+password+"\n" );
 		LogRegService loginserwis = new LogRegService();
-		
-		
-		if(loginserwis.zarejestruj(name,surname,userId, password,email))
-		{
-			response.sendRedirect("index.jsp");
-			System.out.println("sukces" );
-			return;
-		}
-		else
-		{
-			response.sendRedirect("register.jsp");
-			
-			return;
-		}
-	}
+		boolean check = false;
 
+		
+			
+			if(request.getParameter("specjalizacja")!=null)
+			{
+				System.out.println("Wszedlem do lekarza");
+				miasto = request.getParameter("miasto");
+				specjalizacja = request.getParameter("specjalizacja");
+				check = loginserwis.rejestrujSpecjalistow(name, surname, userId, password, email, specjalizacja, miasto);
+				if(check)
+				{
+					response.sendRedirect("index.jsp");
+					System.out.println("sukces" );
+					return;
+				}
+				else
+				{
+					System.out.println("nieudana" );
+					response.sendRedirect("registerMedic.jsp");
+					return;
+				}
+			}
+			else
+			{
+				check = loginserwis.rejestrujPacjentow(name,surname,userId, password,email);
+				System.out.println("Wszedlem do dupka");
+				if(check)
+				{
+					response.sendRedirect("index.jsp");
+					System.out.println("sukces" );
+					return;
+				}
+				else
+				{
+					System.out.println("nieudana" );
+					response.sendRedirect("registerUser.jsp");
+					return;
+				}
+			}
+	}
 }

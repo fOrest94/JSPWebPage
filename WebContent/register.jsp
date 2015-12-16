@@ -2,27 +2,36 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8d859-1">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/Style/loginStyle.css" type="text/css"/>
-<title>Register</title>
-</head>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/Style/loginStyle.css" type="text/css"/>
+		<title>RegisterType</title>
+	</head>
 <body>
-	
+	<%
+            if(request.getParameter("typeOfUser") != null) 
+            {
+                if(request.getParameter("typeOfUser").equals("Specjalista")) 
+                {
+                	response.sendRedirect("registerMedic.jsp");
+                }
+                else if(request.getParameter("typeOfUser").equals("Pacjent")) 
+                {
+                	response.sendRedirect("registerUser.jsp");
+                } 
+            }
+        %>
 	<div class="container">
 		<div class="form-login">
-            <h4>Wpisz dane rejestracji</h4>
-  			<form action="login" method="post">
-  				<input type="text" name="imie" placeholder="imie" />
-            	<input type="text" name="nazwisko" placeholder="nazwisko" />
-            	<input type="text" name="email" placeholder="email" />
-            	<input type="text" name="userId" placeholder="login" />
-            	<input type="password" name="password" placeholder="haslo" />
-            	<div class="wrapper">
-            	    <input type="submit" value="Zarejestruj"/>
-            	</div>
-        	</form>
-    	</div>
+            <h4>Rejestrujesz sie jako:</h4>
+            	<form action="register.jsp" METHOD="post">
+  					<input type="radio" value="Specjalista" name="typeOfUser" />Specjalista<br/>
+            		<input type="radio" value="Pacjent" name="typeOfUser"/>Pacjent<br/>
+            		<div class="wrapper">
+            	  	  <input type="submit" value="Zarejestruj"/>
+            		</div>
+				</form>
+		</div>
 	</div>
 </body>
 </html>

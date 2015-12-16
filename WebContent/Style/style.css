@@ -116,7 +116,44 @@ body
   	background-image: -ms-linear-gradient(top, #5ec3f2, #229db3);
   	background-image: -o-linear-gradient(top, #5ec3f2, #229db3);
   	background-image: linear-gradient(to bottom, #5ec3f2, #229db3);
-	height: 60px;
+  	padding: 10px 0;
+	text-align: center;
+}
+
+ol
+{
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	font-size: 20px;
+	height: 35;
+	line-height: 200%;
+	display: inline-block;
+}
+
+ol a
+{
+	color: black;
+	text-decoration: none;
+	display: block;
+}
+
+ol > li
+{
+	float: left;
+	width: 200px;
+	height: 40px;
+	border-right: 2px groove;
+}
+
+ol > li:first-child
+{
+	border-left: 2px groove;
+}
+
+ol > li:hover
+{
+	background: #81c9db
 }
 .content
 {
@@ -132,7 +169,7 @@ body
 }
 .content p
 {
-	margin: 0px 20px 0px 20px;
+	margin: 0px 40px 0px 40px;
 	padding-top: 5mm;
 	
 }

@@ -14,7 +14,8 @@ public class Database
 	Database()
 	{
 		ladujSterownik();
-		statement = createStatement(connectToDatabase("127.0.0.1","saisp", "root", ""));
+		statement = createStatement(connectToDatabase("localhost:3306","saisp", "root", ""));
+		
 	}
 	public boolean ladujSterownik() 
 	{
@@ -44,7 +45,7 @@ public class Database
 		return null;
 	}
 	
-	public boolean sprawdzUzytkownika(Statement statement, String zapytanie_sql) 
+/*	public boolean sprawdzUzytkownika(Statement statement, String zapytanie_sql) 
 	{
 		try 
 		{
@@ -61,27 +62,21 @@ public class Database
 		{
 			return false;
 		}
-		
-	}
+		*
+	}*/
 	
 	public boolean dodajUzytkownika(Statement statement, String zapytanie_sql) 
 	{
-		try 
-		{
-			if(statement.execute(zapytanie_sql))
+			try
 			{
-			System.out.println("Czemu tak ?");
-	
-			return true;
+				statement.executeUpdate(zapytanie_sql);
+				return true;
 			}
-			else
+			catch (SQLException e) 
+			{
+				System.out.println("metoda nie chodzi");
 				return false;
-		} 
-		catch (SQLException e) 
-		{
-			return false;
-		}
-		
+			}
 	}
 	public ResultSet executeQuery(Statement state, String zapytanie_sql) 
 	{

@@ -6,7 +6,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Style/style.css" type="text/css"/>
-<title>System asygnacji i segregacji pacjentów</title>
+<title>System asygnacji i segregacji pacjentow</title>
 
 </head>
 	<body>
@@ -21,7 +21,13 @@
 				</form>
 			</div>
 			<div class="menu">
-				
+				<ol>
+				<li><a href="#">Strona glowna</a></li>
+				<li><a href="#">Znajdz lekarza</a></li>
+				<li><a href="googleMaps.jsp">Znajdz placowke</a></li>
+				<li><a href="#">O Autorach</a></li>
+			
+				</ol>
 			</div>
 			<div class="content">
 			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
