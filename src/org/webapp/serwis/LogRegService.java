@@ -35,9 +35,9 @@ public class LogRegService
 		return false;
 	}*/
 	
-	public boolean rejestrujSpecjalistow(String imie, String nazwisko, String login, String haslo, String email, String specjalizacja, String miasto)
+	public boolean rejestrujSpecjalistow(String imie, String nazwisko, String login, String haslo, String email, String telefon, String specjalizacja, String miasto)
 	{
-		String rejestruj = "insert into lekarze values('"+imie+"','"+nazwisko+"','"+login+"','"+haslo+"','"+email+"','"+specjalizacja+"','"+miasto+"');";
+		String rejestruj = "insert into lekarze values('"+imie+"','"+nazwisko+"','"+login+"','"+haslo+"','"+email+"','"+telefon+"','"+specjalizacja+"','"+miasto+"');";
 		System.out.println(rejestruj);
 		Database baza = new Database();
 		sprawdz = baza.dodajUzytkownika(baza.statement, rejestruj);

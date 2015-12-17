@@ -4,14 +4,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-
+import java.util.ArrayList;
+import java.sql.ResultSetMetaData;
 
 public class Database 
 {
 	public Statement statement;
 	
-	Database()
+	public Database()
 	{
 		ladujSterownik();
 		statement = createStatement(connectToDatabase("localhost:3306","saisp", "root", ""));
@@ -67,19 +67,33 @@ public class Database
 	
 	public boolean dodajUzytkownika(Statement statement, String zapytanie_sql) 
 	{
-			try
-			{
-				statement.executeUpdate(zapytanie_sql);
-				return true;
-			}
-			catch (SQLException e) 
-			{
-				System.out.println("metoda nie chodzi");
-				return false;
-			}
+		try
+		{
+			statement.executeUpdate(zapytanie_sql);
+			return true;
+		}
+		catch (SQLException e) 
+		{
+			System.out.println("metoda nie chodzi");
+			return false;
+		}
+	}
+	public boolean pobierzZBazy(Statement statement, String zapytanie_sql)
+	{
+		try
+		{
+			statement.executeUpdate(zapytanie_sql);
+			return true;
+		}
+		catch (SQLException e) 
+		{
+			System.out.println("metoda nie chodzi");
+			return false;
+		}
 	}
 	public ResultSet executeQuery(Statement state, String zapytanie_sql) 
 	{
+		System.out.print("executeQuery");
 		try 
 		{
 			return state.executeQuery(zapytanie_sql);
@@ -91,6 +105,42 @@ public class Database
 		return null;
 	}
 	
+	public ArrayList<String> printDataFromQuery(ResultSet result) 
+	{
+		System.out.print("printDataFromQuery");
+		ResultSetMetaData rsmd;
+		ArrayList<String> arrlist = new ArrayList<String>();
+		int licznik = 0;
+		try 
+		{
+			rsmd = result.getMetaData();
+			int numcols = rsmd.getColumnCount();
+ 
+			for (int i = 1; i <= numcols; i++) 
+			{
+				if(rsmd.getColumnLabel(i).equals("imie") || rsmd.getColumnLabel(i).equals("nazwisko") ||
+				   rsmd.getColumnLabel(i).equals("email") || rsmd.getColumnLabel(i).equals("telefon"))
+				{
+					System.out.print(arrlist.add(rsmd.getColumnLabel(i))+" ");
+					licznik++;
+				}
+				
+			}
+			while (result.next()) 
+			{
+						arrlist.add(result.getString("imie"));
+						arrlist.add(result.getString("nazwisko"));
+						arrlist.add(result.getString("email"));
+						arrlist.add(result.getString("telefon"));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Bl¹d odczytu z bazy! " + e.toString());
+			System.exit(3);
+		}
+		return arrlist;
+	}
 	public Connection connectToDatabase(String adress, String dataBaseName, String userName, String password) 
 	{
 		System.out.print("\nLaczenie z baza danych:");

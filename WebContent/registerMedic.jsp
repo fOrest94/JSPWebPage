@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8d859-1">
@@ -16,6 +16,7 @@
   				<input type="text" name="imie" placeholder="imie" />
             	<input type="text" name="nazwisko" placeholder="nazwisko" />
             	<input type="text" name="email" placeholder="email" />
+            	<input type="text" name="telefon" placeholder="telefon" />
             	<input type="text" name="userId" placeholder="login" />
             	<input type="password" name="password" placeholder="haslo" />
             	<input type="text" name="specjalizacja" placeholder="specjalizacja" />

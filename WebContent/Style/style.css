@@ -165,12 +165,47 @@ ol > li:hover
   	background-image: linear-gradient(to bottom, #f9fbfc, #e9f3f5);
 	font-family: Verdana;
 	font-size: 20px;
-	height: 800px;
+	min-height: 800px;
+	padding: 5mm 10mm 5mm 10mm;
+	
 }
 .content p
 {
 	margin: 0px 40px 0px 40px;
 	padding-top: 5mm;
 	
+} 
+.content .map
+{
+	margin: 0 auto 0 auto;
+	position: center;
+	height: 70%; 
+	width : 60%;
+	
 }
+.searchSpecA
+{
+	background: yellow;
+	padding-top: 15mm;
+	width: 460px;
+	height: 200px;	
+	float: left;
+	text-align: center;
+}
+
+.searchSpecB .input
+{
+	margin-right: 40px;
+}
+.searchSpecB
+{
+	padding-top: 15mm;
+	width: 460px;
+	height: 200px;	
+	float: left;
+	celar: both;
+	text-align: center;
+	
+}
+
 

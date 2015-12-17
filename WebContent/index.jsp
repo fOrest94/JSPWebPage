@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -23,9 +23,9 @@
 			<div class="menu">
 				<ol>
 				<li><a href="#">Strona glowna</a></li>
-				<li><a href="#">Znajdz lekarza</a></li>
+				<li><a href="znajdzLekarza.jsp">Znajdz lekarza</a></li>
 				<li><a href="googleMaps.jsp">Znajdz placowke</a></li>
-				<li><a href="#">O Autorach</a></li>
+				<li><a href="oAutorach.jsp">O Autorach</a></li>
 			
 				</ol>
 			</div>
