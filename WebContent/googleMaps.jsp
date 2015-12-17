@@ -5,25 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Style/style.css" type="text/css"/>
-<title>System asygnacji i segregacji pacjentow</title>
-<script
-    src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false">
-</script>
-<script>
-var map;
-function initialize() {
-  var mapOptions = {
-    zoom: 8,
-    center: new google.maps.LatLng(-34.397, 150.644)
-  };
-  map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
-}
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>
+<title>Tytul</title>
 </head>
 <body>
-	<div class="container">
+<div class="container">
 			<div class="header">
 				<div class="logo">SAISP.pl</div>
 				<form action="register.jsp">
@@ -35,20 +20,69 @@ google.maps.event.addDomListener(window, 'load', initialize);
 			</div>
 			<div class="menu">
 				<ol>
-				<li><a href="#">Strona glowna</a></li>
+				<li><a href="index.jsp">Strona glowna</a></li>
 				<li><a href="znajdzLekarza.jsp">Znajdz lekarza</a></li>
 				<li><a href="googleMaps.jsp">Znajdz placowke</a></li>
-				<li><a href="oAutorach.jsp#">O Autorach</a></li>
+				<li><a href="oAutorach.jsp">O Autorach</a></li>
 			
 				</ol>
 			</div>
 			<div class="content">
-			<p><div class="map">
-			<div id="map-canvas" style="height:350px; width:550px"></div>
-			</<p>
-			</div>
-			
+				<div class="map"><div id="map" style="height:350px; width:550px"></div>
+				
+			 
 			</div>
 		</div>
+	
+    <script>
+
+function initMap() {
+
+	var cracowLoc = {lat: 50.0647, lng: 19.945};
+  	var map = new google.maps.Map(document.getElementById('map'), {
+    	center: cracowLoc,
+    	zoom: 10
+  });
+  	var infoWindow = new google.maps.InfoWindow({map: map});
+
+  //lokalizuj
+  	if (navigator.geolocation) {
+    	navigator.geolocation.getCurrentPosition(function(position) {
+      	var pos = {
+        	lat: position.coords.latitude,
+        	lng: position.coords.longitude
+      	};
+
+      	infoWindow.setPosition(pos);
+      	infoWindow.setContent('Location found.');
+      	map.setCenter(pos);
+    	}, function() {
+      	handleLocationError(true, infoWindow, map.getCenter());
+    	});
+  	} else {
+    	// brak wsparcia dla geolokalizacji
+    	handleLocationError(false, infoWindow, map.getCenter());
+  	}
+//function createMarker(place) {
+//	  var placeLoc = place.geometry.location;
+	  var marker = new google.maps.Marker({
+	    map: map,
+	    position: cracowLoc
+	  });  
+  
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  	infoWindow.setPosition(pos);
+  	infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+}
+
+
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqpCUtiwkYDvy7y6ldMzzvJFwZn_S0Sys&signed_in=true&language=pl&callback=initMap" async defer>
+    </script>	
 </body>
 </html>

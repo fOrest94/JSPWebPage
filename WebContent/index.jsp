@@ -22,7 +22,7 @@
 			</div>
 			<div class="menu">
 				<ol>
-				<li><a href="#">Strona glowna</a></li>
+				<li><a href="index.jsp">Strona glowna</a></li>
 				<li><a href="znajdzLekarza.jsp">Znajdz lekarza</a></li>
 				<li><a href="googleMaps.jsp">Znajdz placowke</a></li>
 				<li><a href="oAutorach.jsp">O Autorach</a></li>

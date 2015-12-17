@@ -58,8 +58,9 @@
 				<%@page  %>
 				<div class="results">
 				<%
-							ArrayList<String> rekordy = (ArrayList<String>) request.getAttribute("lista_ziomkow");		
+							ArrayList<String> rekordy = (ArrayList<String>) request.getAttribute("lista_ziomkow");	
 				%>
+				<% //rekordy.get(3).toString(); %>
 				</div>
 			</div>
 		</div>

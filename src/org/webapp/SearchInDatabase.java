@@ -33,7 +33,9 @@ public class SearchInDatabase extends HttpServlet
 			String pobierzZBazy = "SELECT * FROM `lekarze` WHERE imie = '"+imie+"' and nazwisko = '"+nazwisko+"';";
 			listaRekordow = bazaSQL.printDataFromQuery(bazaSQL.executeQuery(bazaSQL.statement, pobierzZBazy));
 			request.setAttribute("lista_ziomkow", listaRekordow);
-			response.sendRedirect("/znajdzLekarza.jsp");
+			response.sendRedirect("znajdzLekarza.jsp");
+			
+			
 			
 			for(int i =0;i<listaRekordow.size();i++)
 			{

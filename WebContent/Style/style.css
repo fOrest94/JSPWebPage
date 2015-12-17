@@ -177,7 +177,7 @@ ol > li:hover
 } 
 .content .map
 {
-	margin: 0 auto 0 auto;
+	margin: 20mm auto 0 auto;
 	position: center;
 	height: 70%; 
 	width : 60%;
@@ -185,7 +185,7 @@ ol > li:hover
 }
 .searchSpecA
 {
-	background: yellow;
+	background: white;
 	padding-top: 15mm;
 	width: 460px;
 	height: 200px;	
