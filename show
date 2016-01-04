@@ -1,0 +1,40 @@
+[33mcommit 28aa69a8304078856692e229a5eef477c65744e9[m
+Author: fOrest <sewerdudek15@gmail.com>
+Date:   Thu Dec 17 05:24:30 2015 +0100
+
+    Graficznie udoskonalona wersja z prawie ukończona wyszukiwarka
+    specjalistow
+
+[33mcommit a641c3414ccc6ed555a1f7a7a060b81cc06d3225[m
+Author: fOrest <sewerdudek15@gmail.com>
+Date:   Wed Dec 16 06:21:13 2015 +0100
+
+    W przedstawionym commicie zostało zrobione prawidłowo działające
+    dodawanie użytkowników i lekarzy (rejestracja),wygląd aplikacji został
+    lekko zmodyfikowany i przygotowany na dodanie innych funkcjonalności
+
+[33mcommit fb2ada504ba48caa6e1eeebd1905142fccee11e4[m
+Author: fOrest <sewerdudek15@gmail.com>
+Date:   Tue Dec 15 06:23:47 2015 +0100
+
+    Zrobione całe nic ... podczas kończenia pisania kodu do rejestracji
+    użytkowników, pojawił się błąd z kosmosu i nie mogłem w pełni uruchomić
+    projektu
+
+[33mcommit 8f8eaa483c95565312ef9cedd7413bc868e86056[m
+Author: fOrest <sewerdudek15@gmail.com>
+Date:   Mon Dec 14 03:15:11 2015 +0100
+
+    Udoskonalony szablon stronki z probnym logowaniem
+
+[33mcommit d988c05c0e0e7bfccbdd457e77e598b5ccef85bd[m
+Author: fOrest <sewerdudek15@gmail.com>
+Date:   Sun Dec 13 15:12:00 2015 +0100
+
+    Utworzenie nagłówka aplikacji internetowej z użyciem CSS
+
+[33mcommit 683f57fc2c9ffb0fd3be63dde6aaadd3e0962504[m
+Author: fOrest <sewerdudek15@gmail.com>
+Date:   Sun Dec 13 02:04:10 2015 +0100
+
+    Utworzenie projektu

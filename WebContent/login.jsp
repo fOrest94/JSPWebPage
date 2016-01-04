@@ -13,8 +13,10 @@
 		<div class="form-login">
             <h4>Wpisz dane logowania</h4>
   			<form action="login" method="post">
-            	<input type="text" name="userId" placeholder="login" />
-            	<input type="password" name="password" placeholder="haslo" />
+  				<div class="textplace">Login:</div>
+            	<input type="text" name="userId"/>
+            	<div class="textplace">Haslo:</div>
+            	<input type="password" name="password"/>
             	<div class="wrapper">
             	    <input type="submit" value="Zaloguj"/>
             	</div>

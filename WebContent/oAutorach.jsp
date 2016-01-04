@@ -7,7 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Style/style.css" type="text/css"/>
 <title>System asygnacji i segregacji pacjentow</title>
-
 </head>
 	<body>
 		<div class="container">

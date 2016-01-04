@@ -1,4 +1,4 @@
-package org.webapp.serwis;
+package org.webapp.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -96,6 +96,7 @@ public class Database
 		System.out.print("executeQuery");
 		try 
 		{
+			
 			return state.executeQuery(zapytanie_sql);
 		} 
 		catch (SQLException e) 
@@ -105,7 +106,7 @@ public class Database
 		return null;
 	}
 	
-	public ArrayList<String> printDataFromQuery(ResultSet result) 
+	public ArrayList<String> pokazSpecjalistow(ResultSet result) 
 	{
 		System.out.print("printDataFromQuery");
 		ResultSetMetaData rsmd;
@@ -141,6 +142,28 @@ public class Database
 		}
 		return arrlist;
 	}
+	public String findUserInfo(ResultSet result,String var) 
+	{
+		System.out.print("printDataFromQuery");
+		String login = new String();
+		try 
+		{
+			while (result.next()) 
+			{
+				System.out.println("tu sie jebe");
+						login = result.getString(var);
+						System.out.println(login);
+						System.out.println("tu nie dochodze");
+			}
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Bl¹d odczytu z bazy! " + e.toString());
+			System.exit(3);
+		}
+		return login;
+	}
+	
 	public Connection connectToDatabase(String adress, String dataBaseName, String userName, String password) 
 	{
 		System.out.print("\nLaczenie z baza danych:");

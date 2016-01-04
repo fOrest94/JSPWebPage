@@ -157,7 +157,7 @@ ol > li:hover
 }
 .content
 {
-	background: #ffffff;
+	background-color: yellow;
  	background-image: -webkit-linear-gradient(top, #f9fbfc, #e9f3f5);
  	background-image: -moz-linear-gradient(top, #f9fbfc, #e9f3f5);
  	background-image: -ms-linear-gradient(top, #f9fbfc, #e9f3f5);
@@ -185,7 +185,6 @@ ol > li:hover
 }
 .searchSpecA
 {
-	background: white;
 	padding-top: 15mm;
 	width: 460px;
 	height: 200px;	
@@ -203,9 +202,16 @@ ol > li:hover
 	width: 460px;
 	height: 200px;	
 	float: left;
-	celar: both;
+	
 	text-align: center;
 	
+}
+.results
+{
+	clear: both;
+	padding-top: 15mm;
+	height: 400px;
+	background-color: white;
 }
 
 

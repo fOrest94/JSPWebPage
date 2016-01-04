@@ -1,8 +1,11 @@
-package org.webapp;
+package org.webapp.controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.webapp.serwis.Database;
+import org.webapp.database.Database;
 
 
 @WebServlet("/znajdzLekarza")
@@ -31,7 +34,7 @@ public class SearchInDatabase extends HttpServlet
 			imie = request.getParameter("imie");
 			nazwisko = request.getParameter("nazwisko");
 			String pobierzZBazy = "SELECT * FROM `lekarze` WHERE imie = '"+imie+"' and nazwisko = '"+nazwisko+"';";
-			listaRekordow = bazaSQL.printDataFromQuery(bazaSQL.executeQuery(bazaSQL.statement, pobierzZBazy));
+			listaRekordow = bazaSQL.pokazSpecjalistow(bazaSQL.executeQuery(bazaSQL.statement, pobierzZBazy));
 			request.setAttribute("lista_ziomkow", listaRekordow);
 			response.sendRedirect("znajdzLekarza.jsp");
 			
@@ -49,7 +52,7 @@ public class SearchInDatabase extends HttpServlet
 			specjalizacja = request.getParameter("specjalizacja");
 			miasto = request.getParameter("miasto");
 			String pobierzZBazy = "SELECT * FROM `lekarze` WHERE specjalizacja = '"+specjalizacja+"' and miasto = '"+miasto+"';";
-			listaRekordow = bazaSQL.printDataFromQuery(bazaSQL.executeQuery(bazaSQL.statement, pobierzZBazy));
+			listaRekordow = bazaSQL.pokazSpecjalistow(bazaSQL.executeQuery(bazaSQL.statement, pobierzZBazy));
 			HttpSession session = request.getSession(true);
 			session.setAttribute("rekordy", listaRekordow);
 			
@@ -60,7 +63,7 @@ public class SearchInDatabase extends HttpServlet
 			Database bazaDanych = new Database();
 			specjalizacja = request.getParameter("specjalizacja");
 			String pobierzZBazy = "SELECT * FROM `lekarze` WHERE specjalizacja = '"+specjalizacja+"';";
-			listaRekordow = bazaSQL.printDataFromQuery(bazaSQL.executeQuery(bazaSQL.statement, pobierzZBazy));
+			listaRekordow = bazaSQL.pokazSpecjalistow(bazaSQL.executeQuery(bazaSQL.statement, pobierzZBazy));
 			
 			for(int i =0;i<listaRekordow.size();i++)
 			{
@@ -74,12 +77,24 @@ public class SearchInDatabase extends HttpServlet
 			Database bazaDanych = new Database();
 			miasto = request.getParameter("miasto");
 			String pobierzZBazy = "SELECT * FROM `lekarze` WHERE miasto = '"+miasto+"';";
-			listaRekordow = bazaSQL.printDataFromQuery(bazaSQL.executeQuery(bazaSQL.statement, pobierzZBazy));
+			listaRekordow = bazaSQL.pokazSpecjalistow(bazaSQL.executeQuery(bazaSQL.statement, pobierzZBazy));
 			
 			for(int i =0;i<listaRekordow.size();i++)
 			{
 					System.out.println(listaRekordow.get(i));
 			}
+			
+			//response.setContentType("text/html");
+			//PrintWriter out = response.getWriter();
+			//Iterator it = listaRekordow.iterator();
+			//while(it.hasNext())
+			//{
+			//	out.println("<br> *: "+it.next());
+			//}
+			
+			request.setAttribute("rekordy", listaRekordow);
+			RequestDispatcher view = request.getRequestDispatcher("znajdzLekarza.jsp");
+			view.forward(request, response);
 			
 		}
 		else

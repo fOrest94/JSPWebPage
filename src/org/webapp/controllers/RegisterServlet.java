@@ -1,4 +1,4 @@
-package org.webapp;
+package org.webapp.controllers;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.webapp.serwis.LogRegService;
+import org.webapp.models.LogRegService;
 
 
-@WebServlet(urlPatterns ={"/registerMedic", "/registerUser"})
+@WebServlet(urlPatterns ={"/register"})
 
 public class RegisterServlet extends HttpServlet 
 {
@@ -35,7 +35,7 @@ public class RegisterServlet extends HttpServlet
 				telefon = request.getParameter("telefon");
 				miasto = request.getParameter("miasto");
 				specjalizacja = request.getParameter("specjalizacja");
-				check = loginserwis.rejestrujSpecjalistow(name, surname, userId, password, email,telefon, specjalizacja, miasto);
+				check = loginserwis.zarejestruj(name, surname, userId, password, email,telefon, specjalizacja, miasto);
 				if(check)
 				{
 					response.sendRedirect("index.jsp");
@@ -51,7 +51,7 @@ public class RegisterServlet extends HttpServlet
 			}
 			else
 			{
-				check = loginserwis.rejestrujPacjentow(name,surname,userId, password,email);
+				check = loginserwis.zarejestruj(name,surname,userId, password,email);
 				System.out.println("Wszedlem do dupka");
 				if(check)
 				{
