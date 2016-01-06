@@ -106,7 +106,7 @@ public class Database
 		return null;
 	}
 	
-	public ArrayList<String> pokazSpecjalistow(ResultSet result) 
+	public ArrayList<String> wypiszZBazy(ResultSet result) 
 	{
 		System.out.print("printDataFromQuery");
 		ResultSetMetaData rsmd;

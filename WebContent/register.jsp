@@ -38,7 +38,7 @@
 				            	<div class="textplace">Telefon:</div>
 				            	<input type="text" name="telefon"/><br>
 				            	<div class="textplace">Login:</div>
-				            	<input type="text" name="userId"/><br>
+				            	<input type="text" name="login"/><br>
 				            	<div class="textplace">Haslo:</div>
 				            	<input type="password" name="password"/><br>
 				            	<div class="textplace">Specjalizacja:</div>
@@ -63,6 +63,8 @@
 								<input type="text" name="imie"/>
 								<div class="textplace">Nazwisko:</div>
 			        			<input type="text" name="nazwisko"/>
+			        			<div class="textplace">Nazwisko:</div>
+			        			<input type="text" name="PESEL"/>
 			        			<div class="textplace">Email:</div>
 			        			<input type="text" name="email"/>
 			        			<div class="textplace">Login:</div>

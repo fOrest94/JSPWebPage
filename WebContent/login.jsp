@@ -13,6 +13,11 @@
 		<div class="form-login">
             <h4>Wpisz dane logowania</h4>
   			<form action="login" method="post">
+  				<select name="typeOfUser" id="typeOfUser" onchange="submit();">
+			        <option selected value="Pacjent">Wybierz:</option>
+			        <option value="Pacjent">Pacjent</option>
+			        <option value="Specjalista">Specjalista</option>
+	    		</select>
   				<div class="textplace">Login:</div>
             	<input type="text" name="userId"/>
             	<div class="textplace">Haslo:</div>
