@@ -9,45 +9,55 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.webapp.models.LoginBean;
+import org.webapp.models.UserBean;
 
 
 @WebServlet(urlPatterns ={"/login"})
 public class LoginServlet extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
-
+	private LoginBean bean;
+	private UserBean userBean;
+	private boolean waliduj;
+	private boolean czyIstnieje;
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		
-		String login = request.getParameter("userId");
-		String password = request.getParameter("password");
-		
-		LoginBean bean = new LoginBean();
-		bean.setLogin(login);
-		bean.setPassword(password);
-		
-		boolean czyIstnieje = bean.validate();
-		
-		if(czyIstnieje)
+		userBean = new UserBean();
+		userBean.setLogin(request.getParameter("userId"));
+		userBean.setHaslo(request.getParameter("password"));
+		userBean.setType(request.getParameter("typeOfUser"));
+		System.out.println("1");
+		bean = new LoginBean();
+		waliduj = bean.walidacja(userBean.getLogin(), userBean.getHaslo());
+		czyIstnieje = bean.czyIstnieje(userBean.getLogin(),userBean.getHaslo(),userBean.getType());
+		System.out.println("2");
+		if(waliduj)
 		{
-			System.out.println("Jest taki login");
-			String type = bean.checkTypeOfUser();
-			
-			Cookie setLoginSession = new Cookie("login",login);
-			Cookie setTypeSession = new Cookie("type",type);
-			setLoginSession.setMaxAge(24*60*60);
-			setTypeSession.setMaxAge(24*60*60);
-			response.addCookie(setTypeSession);
-			response.addCookie(setLoginSession);
-			
+			if(czyIstnieje)
+			{
+				System.out.println("5");
+				Cookie cookie = new Cookie("userBean", userBean.getLogin());
+				cookie.setMaxAge(30); 
+				response.addCookie(cookie);
+				response.sendRedirect("index.jsp");
+			}
+			else
+			{
+				System.out.println("4");
+				request.setAttribute("rekordy", "Niepoprawny login lub haslo");
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
+			}	
 		}
 		else
 		{
-			System.out.println("Co jest kurwa");
-			RequestDispatcher rd = request.getRequestDispatcher("login-failed.jsp");  
-			rd.forward(request, response);  
+			System.out.println("3");
+			request.setAttribute("rekordy", "Za krotki login lub haslo");
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
 		
 		

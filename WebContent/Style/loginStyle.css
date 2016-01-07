@@ -37,6 +37,15 @@ body
 	font-style: bold;
 	padding: 10px 0px 5px 0px;
 }
+.error
+{
+	font-family: "Times New Roman";
+	font-size: 15px;
+	font-style: bold;
+	padding: 10px 0px 5px 0px;
+	color: red;
+}
+
 .form-register
 {
 

@@ -4,52 +4,53 @@ import org.webapp.database.Database;
 
 public class LoginBean 
 {
-	String login;
-	String password;
 	
-	public String getLogin() 
-	{
-		return login;
-	}
-	public void setLogin(String login) 
-	{
-		this.login = login;
-	}
-	public String getPassword() 
-	{
-		return password;
-	}
-	public void setPassword(String password) 
-	{
-		this.password = password;
-	}
-	public boolean validate()
+	public boolean czyIstnieje(String login, String haslo, String type)
 	{
 		Database bazaSQL = new Database();
-		if(login.equals("admin") && password.equals("admin"))
+		System.out.println(type);
+		if(login.equals("admin") && haslo.equals("admin"))
 		{
 			return true;
 		}
-		else
+		else if(type.equals("pacjent"))
 		{
-			String SQL = "SELECT login FROM `wszyscy` WHERE login = '"+this.login+"' and haslo = '"+password+"';";
-			String loginExist = bazaSQL.findUserInfo(bazaSQL.executeQuery(bazaSQL.statement, SQL),"login");
+			String SQL = "SELECT * FROM pacjenci WHERE login = '"+login+"' and haslo = '"+haslo+"';";
 			
-			if(loginExist.equals(login))
+			boolean loginExist = bazaSQL.findUserInfo(bazaSQL.executeQuery(bazaSQL.statement, SQL), login, haslo);
+			System.out.println("4.1");
+			if(loginExist)
 			{
 				return true;
 			}
 			else
 				return false;
 		}
+		else if(type.equals("specjalisci"))
+		{
+			String SQL = "SELECT * FROM specjalisci WHERE login = '"+login+"' and haslo = '"+haslo+"';";
+			
+			boolean loginExist = bazaSQL.findUserInfo(bazaSQL.executeQuery(bazaSQL.statement, SQL), login, haslo);
+			System.out.println("4.2");
+			if(loginExist)
+			{
+				return true;
+			}
+			else
+				return false;
+		}
+		System.out.println("4.3");
+		return false;
 	}
-	public String checkTypeOfUser()
+	
+	public boolean walidacja(String login, String haslo)
 	{
-		Database bazaSQL = new Database();
-		String SQL = "SELECT typ FROM `wszyscy` WHERE login = '"+this.login+"';";
-		String type = bazaSQL.findUserInfo(bazaSQL.executeQuery(bazaSQL.statement, SQL),"typ");
-		
-		return type;
+		System.out.println("Walidacja sie sypie");
+		if((login.length() < 6) || (haslo.length() < 6))
+		{
+			return false;
+		}
+		return true;
 	}
 	
 }

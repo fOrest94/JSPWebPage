@@ -6,30 +6,50 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Style/style.css" type="text/css"/>
 <title>System asygnacji i segregacji pacjentow</title>
-<%   
-   Cookie firstName = new Cookie("login", request.getParameter("login"));
-   Cookie lastName = new Cookie("type", request.getParameter("type"));
-
-   firstName.setMaxAge(60*60*24); 
-   lastName.setMaxAge(60*60*24); 
-   
-   response.addCookie( firstName );
-   response.addCookie( lastName );
+<%! 
+	boolean sprawdzCiasteczko(HttpServletRequest request)
+    {
+		Cookie[] cookie;
+		cookie = request.getCookies();
+      
+		if(cookie != null) //There are cookies
+     	{
+        	for(int i =0 ; i<cookie.length ; i++)
+        	{
+            	Cookie c = cookie[i];   
+            	if(c.getName().equals("userBean") && c.getValue().length() > 4)
+           		{
+            		System.out.println(c.getValue());
+                	return true;
+            	}
+        	}
+     	}
+    	return false; //this means no cookies were found
+    }
 %>
+
 </head>
 	<body>
 		<div class="container">
 			<div class="header">
 				<div class="logo">SAISP.pl</div>
 				<form action="register.jsp">
-				<%
-				//	if(firstName.)
-				%>
 				<input type="submit" class="signin" value="Sign in"/>
 				</form>
-				<form action="login.jsp">
-				<input type="submit" class="login" value="Log in"/>
+		<% 		if(sprawdzCiasteczko(request))
+				{%>
+				<form action="userPanel.jsp">
+				<input type="submit" class="login" value="Sign out"/>
 				</form>
+			<%	}
+			 	else
+				{%>
+				<form action="login.jsp">
+				<input type="submit" class="login" value="Sign in"/>
+				</form>
+				<% 
+				}
+				%>
 			</div>
 			<div class="menu">
 				<ol>

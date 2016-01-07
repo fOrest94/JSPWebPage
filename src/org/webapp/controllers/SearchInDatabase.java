@@ -82,16 +82,7 @@ public class SearchInDatabase extends HttpServlet
 			for(int i =0;i<listaRekordow.size();i++)
 			{
 					System.out.println(listaRekordow.get(i));
-			}
-			
-			//response.setContentType("text/html");
-			//PrintWriter out = response.getWriter();
-			//Iterator it = listaRekordow.iterator();
-			//while(it.hasNext())
-			//{
-			//	out.println("<br> *: "+it.next());
-			//}
-			
+			}		
 			request.setAttribute("rekordy", listaRekordow);
 			RequestDispatcher view = request.getRequestDispatcher("znajdzLekarza.jsp");
 			view.forward(request, response);

@@ -106,7 +106,7 @@ public class Database
 		return null;
 	}
 	
-	public ArrayList<String> wypiszZBazy(ResultSet result) 
+	public ArrayList<String> pokazSpecjalistow(ResultSet result) 
 	{
 		System.out.print("printDataFromQuery");
 		ResultSetMetaData rsmd;
@@ -142,18 +142,20 @@ public class Database
 		}
 		return arrlist;
 	}
-	public String findUserInfo(ResultSet result,String var) 
+	public boolean ifUserExist(ResultSet result, String login, String email) 
 	{
-		System.out.print("printDataFromQuery");
-		String login = new String();
 		try 
 		{
 			while (result.next()) 
 			{
-				System.out.println("tu sie jebe");
-						login = result.getString(var);
-						System.out.println(login);
-						System.out.println("tu nie dochodze");
+						if(result.getString("login").equals(login))
+						{
+							return false;
+						}
+						else if(result.getString("email").equals(email))
+						{
+							return false;
+						}
 			}
 		} 
 		catch (SQLException e) 
@@ -161,7 +163,26 @@ public class Database
 			System.out.println("Bl¹d odczytu z bazy! " + e.toString());
 			System.exit(3);
 		}
-		return login;
+		return true;
+	}
+	public boolean findUserInfo(ResultSet result, String login, String password) 
+	{
+		try 
+		{
+			while (result.next()) 
+			{
+				if(result.getString("login").equals(login) && result.getString("haslo").equals(password))
+				{
+					return true;
+				}
+			}
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Bl¹d odczytu z bazy! " + e.toString());
+			System.exit(3);
+		}
+		return false;
 	}
 	
 	public Connection connectToDatabase(String adress, String dataBaseName, String userName, String password) 

@@ -9,66 +9,22 @@
 </head>
 <body>	
 	<div class="container">
-		<div class="select-place">
-    		<form action="register.jsp" method="post">
-    		<div class="t">Rejestrujesz sie jako:</div>
-	    		<select name="typeOfUser" id="typeOfUser" onchange="submit();">
-			        <option selected value="Pacjent">Wybierz:</option>
-			        <option value="Pacjent">Pacjent</option>
-			        <option value="Specjalista">Specjalista</option>
-	    		</select>
-	    	</form>
-		</div>
-    	<%
-            if(request.getParameter("typeOfUser") != null) 
-            {
-                if(request.getParameter("typeOfUser").equals("Specjalista")) 
-                {
-                	System.out.print("lekarz");
-                	%>
-                		<div class="form-register">
-          				<div class="t">Wypelnij formularz:</div>
-				  			<form action="register" method="post">
-				  				<div class="textplace">Imie:</div>
-				  				<input type="text" name="imie"/><br>
-				  				<div class="textplace">Nazwisko:</div>
-				            	<input type="text" name="nazwisko"/><br>
-				            	<div class="textplace">Email:</div>
-				            	<input type="text" name="email"/><br>
-				            	<div class="textplace">Telefon:</div>
-				            	<input type="text" name="telefon"/><br>
-				            	<div class="textplace">Login:</div>
-				            	<input type="text" name="login"/><br>
-				            	<div class="textplace">Haslo:</div>
-				            	<input type="password" name="password"/><br>
-				            	<div class="textplace">Specjalizacja:</div>
-				            	<input type="text" name="specjalizacja"/><br>
-				            	<div class="textplace">Miasto:</div>
-				            	<input type="text" name="miasto"/><br>
-				            	<div class="wrapper">
-				            	    <input type="submit" value="Zarejestruj"/>
-				            	</div>
-				        	</form>
-				    	</div>
-    				<%
-                }
-                else if(request.getParameter("typeOfUser").equals("Pacjent")) 
-                {
-                	System.out.print("pacjent");
-                	%>
+  
             			<div class="form-register">
         				<div class="t">Wypelnij formularz:</div>
+        				<div class="error">${rekordy}</div>
 							<form action="register" method="post">
+								<input type="hidden" name="typeOfUser" value="pacjent" />
 								<div class="textplace">Imie:</div>
 								<input type="text" name="imie"/>
 								<div class="textplace">Nazwisko:</div>
 			        			<input type="text" name="nazwisko"/>
-			        			<div class="textplace">Nazwisko:</div>
+			        			<div class="textplace">PESEL:</div>
 			        			<input type="text" name="PESEL"/>
 			        			<div class="textplace">Email:</div>
 			        			<input type="text" name="email"/>
 			        			<div class="textplace">Login:</div>
-			        			<input type="text" name="userId"/>
+			        			<input type="text" name="login"/>
 			        			<div class="textplace">Haslo:</div>
 			        			<input type="password" name="password"/>
         						<div class="wrapper">
@@ -76,10 +32,6 @@
         						</div>
     						</form>
 						</div>
-					<%
-                } 
-            }
-        %>
 	</div>
 </body>
 </html>
