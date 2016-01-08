@@ -34,7 +34,8 @@
 			
 				<div class="searchSpecA">
 					<form action="znajdzLekarza" method="get">
-						Specjalizacja: <select name="specjalizacja" selected value="wybierz">
+					<input type="hidden" name="typeOfSearch" value="noName" />
+						Specjalizacja: <select name="specjalizacja">
 							<option disabled selected value="wybierz">wybierz</option>
   							<option value="chirurg">Chirurg</option>
  							<option value="dermatolog">Dermatolog</option>
@@ -48,6 +49,7 @@
 				
 				<div class="searchSpecB">
 					<form action="znajdzLekarza" method="get">
+					<input type="hidden" name="typeOfSearch" value="byName" />
 						<label for="Imie">Imie:  </label>
 						<input type="text" name="imie" placeholder="wpisz"/></br>
 						<label for="Nazwisko">Nazwisko:</label>
@@ -58,7 +60,14 @@
 				<%@page  %>
 				<div class="results">
 				<%
-							ArrayList<String> rekordy = (ArrayList<String>) request.getAttribute("rekordy");	
+						ArrayList<String> rekordy = new ArrayList<String>();
+						int rekordy_dlugosc;
+						rekordy = (ArrayList<String>) request.getAttribute("rekordy");	
+						
+						for(int i=0;i<rekordy.size();i++)
+							{
+								out.println(rekordy.get(i));
+							}
 				%>
 				<% //rekordy.get(3).toString(); %>
 				</div>

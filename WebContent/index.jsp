@@ -39,13 +39,13 @@
 		<% 		if(sprawdzCiasteczko(request))
 				{%>
 				<form action="userPanel.jsp">
-				<input type="submit" class="login" value="Sign out"/>
+				<input type="submit" class="login" value="Log out"/>
 				</form>
 			<%	}
 			 	else
 				{%>
 				<form action="login.jsp">
-				<input type="submit" class="login" value="Sign in"/>
+				<input type="submit" class="login" value="Log in"/>
 				</form>
 				<% 
 				}
