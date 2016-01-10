@@ -35,7 +35,9 @@ public class ShowSpecServlet extends HttpServlet
 			bean.setNazwisko(request.getParameter("nazwisko"));
 			lista = bean.getNamedRecords();
 			request.setAttribute("rekordy", lista);
+			request.setAttribute("label", bean.getByNameLabel());
 			request.getRequestDispatcher("znajdzLekarza.jsp").forward(request, response);
+			
 			
 		}
 		else if(request.getParameter("typeOfSearch").equals("noName"))

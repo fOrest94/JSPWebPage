@@ -109,6 +109,30 @@ body
   	background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
  	text-decoration: none;
 }
+
+.user-panel
+{
+	background: #ffffff;
+	background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  	background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  	background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  	background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+	background-image: linear-gradient(to bottom, #ffffff, #9fb6c4);
+	-webkit-border-radius: 15;
+	-moz-border-radius: 15;
+	border-radius: 15px;
+	border: solid #1f628d 2px;
+	text-shadow: 1px 1px 3px #f0e8f0;
+	font-family: Georgia;
+	color: #0a010a;
+	font-size: 15px;
+	text-decoration: none;
+	float: right;
+  	width: 100px;
+ 	margin: 15px 5px 15px 10px;
+ 	height: 30px;
+ 	text-align: center;
+}
 .menu
 {
   	background-image: -webkit-linear-gradient(top, #5ec3f2, #229db3);

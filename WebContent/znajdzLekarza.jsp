@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.ArrayList"%>
-
+<%@page import="javax.servlet.http.Cookie"%>
+<%@page import="java.io.IOException"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,28 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Style/style.css" type="text/css"/>
 <title>System asygnacji i segregacji pacjentow</title>
+
+<%! 
+	boolean sprawdzCiasteczko(HttpServletRequest request)
+    {
+		Cookie[] cookie;
+		cookie = request.getCookies();
+      
+		if(cookie != null) 
+     	{
+        	for(int i =0 ; i<cookie.length ; i++)
+        	{
+            	Cookie c = cookie[i];   
+            	if(c.getName().equals("userBean") && c.getValue().length() > 4)
+           		{
+            		System.out.println(c.getValue());
+                	return true;
+            	}
+        	}
+     	}
+    	return false; 
+    }
+%>
 
 </head>
 	<body>
@@ -18,9 +41,20 @@
 				<form action="register.jsp">
 				<input type="submit" class="signin" value="Sign in"/>
 				</form>
+		<% 		if(sprawdzCiasteczko(request))
+				{%>
+				<form action="userPanel.jsp">
+				<input type="submit" class="login" value="Log out"/>
+				</form>
+			<%	}
+			 	else
+				{%>
 				<form action="login.jsp">
 				<input type="submit" class="login" value="Log in"/>
 				</form>
+				<% 
+				}
+				%>
 			</div>
 			<div class="menu">
 				<ol>
@@ -60,16 +94,21 @@
 				<%@page  %>
 				<div class="results">
 				<%
-						ArrayList<String> rekordy = new ArrayList<String>();
-						int rekordy_dlugosc;
+				if(request.getAttribute("label") != null)	
+					out.println(request.getAttribute("label"));
+					if(request.getAttribute("rekordy") != null)
+					{
+						ArrayList<String> rekordy = new ArrayList<String>(40);
 						rekordy = (ArrayList<String>) request.getAttribute("rekordy");	
-						
 						for(int i=0;i<rekordy.size();i++)
-							{
-								out.println(rekordy.get(i));
-							}
+						{
+							if(i%4 == 0)
+							%><br>
+							<% 
+							out.println(rekordy.get(i));
+						}
+					}
 				%>
-				<% //rekordy.get(3).toString(); %>
 				</div>
 			</div>
 			

@@ -52,6 +52,16 @@ public class ShowSpecBean
 		this.miasto = miasto;
 	}
 	
+	public String getByNameLabel()
+	{
+		return this.imie+", "+this.nazwisko;
+	}
+	
+	public String getNoNameLabel()
+	{
+		return this.specjalizacja+", "+this.miasto;
+	}
+	
 	public ArrayList<String> getNamedRecords()
 	{
 		System.out.println("2.0");

@@ -8,12 +8,13 @@ public class LoginBean
 	public boolean czyIstnieje(String login, String haslo, String type)
 	{
 		Database bazaSQL = new Database();
-		System.out.println(type);
+		System.out.println("*"+type+"*");
+		System.out.println("*"+login+"*"+haslo+"*");
 		if(login.equals("admin") && haslo.equals("admin"))
 		{
 			return true;
 		}
-		else if(type.equals("pacjent"))
+		else if(type.equals("Pacjent"))
 		{
 			String SQL = "SELECT * FROM pacjenci WHERE login = '"+login+"' and haslo = '"+haslo+"';";
 			
@@ -26,9 +27,9 @@ public class LoginBean
 			else
 				return false;
 		}
-		else if(type.equals("specjalisci"))
+		else if(type.equals("Specjalista"))
 		{
-			String SQL = "SELECT * FROM specjalisci WHERE login = '"+login+"' and haslo = '"+haslo+"';";
+			String SQL = "SELECT * FROM lekarze WHERE login = '"+login+"' and haslo = '"+haslo+"';";
 			
 			boolean loginExist = bazaSQL.findUserInfo(bazaSQL.executeQuery(bazaSQL.statement, SQL), login, haslo);
 			System.out.println("4.2");

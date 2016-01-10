@@ -15,9 +15,10 @@
   			<form action="login" method="post">
   				<select name="typeOfUser" id="typeOfUser"">
 			        <option selected value="pacjent">Wybierz:</option>
-			        <option value="pacjent">Pacjent</option>
+			        <option value="Pacjent">Pacjent</option>
 			        <option value="Specjalista">Specjalista</option>
 	    		</select>
+	    		<input type="hidden" value="0" name="mode" id="mode">
 	    		<div class="error">${rekordy}</div>
   				<div class="textplace">Login:</div>
             	<input type="text" name="userId"/>
