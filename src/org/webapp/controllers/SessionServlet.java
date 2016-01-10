@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/SessionServlet")
+import org.webapp.models.UserBean;
+
+@WebServlet("/userPanel")
 public class SessionServlet extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
-
+	private UserBean userBean;
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		/*request.setAttribute("attributeName",yourStringVAlue);
-		RequestDispatcher rd = request.getRequestDispatcher("yourServletPattern");
-		rd.forward(request,response);
-		In your Servlet2
-
-		String someName = (String)request.getAttribute("attributeName");*/
+		
 	}
 
 }

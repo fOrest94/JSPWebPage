@@ -4,6 +4,9 @@ import org.webapp.database.Database;
 
 public class LoginBean 
 {
+	private String login;
+	private String haslo;
+	private String type;
 	
 	public boolean czyIstnieje(String login, String haslo, String type)
 	{
@@ -53,5 +56,6 @@ public class LoginBean
 		}
 		return true;
 	}
+	
 	
 }

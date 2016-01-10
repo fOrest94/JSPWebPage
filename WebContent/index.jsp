@@ -9,8 +9,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Style/style.css" type="text/css"/>
 <title>System asygnacji i segregacji pacjentow</title>
 <%! 
+	String login;
+	String type;
 	
-	String login, haslo;
 	boolean sprawdzCiasteczko(HttpServletRequest request)
 	{
 		Cookie[] cookie;
@@ -27,10 +28,10 @@
 	        		login = cookie[i].getValue();
 	        		sesja++;
 	        	}
-	        	else if(cookie[i].getName().equals("passWord") )
+	        	else if(cookie[i].getName().equals("type") )
 	       		{
 	        		System.out.println("xd"+cookie[i].getValue()+"xd");
-	        		haslo = cookie[i].getValue();
+	        		type = cookie[i].getValue();
 	        		sesja++;
 	        	}
 	        	System.out.println(cookie[i].getValue()+"*"+cookie[i].getName()+"**");
@@ -45,7 +46,7 @@
 	}
 
 %>
-
+	
 </head>
 	<body>
 		<div class="container">
@@ -60,12 +61,12 @@
 				<input type="hidden" value="1" name="mode" id="mode">
 				<input type="submit" class="login" value="Log out"/>
 				</form>
-				<form action="userPanel" method="post">
-				<input type="hidden" value="2" name="mode" id="mode">
-				<input type="hidden" value="${login}" name="userId">
-				<input type="hidden" value="${haslo}" name="password">
-				<input type="submit" class="user-panel" value="Moj profil"/>
-				</form>
+					<form action="userPanel" method="post">
+					<input type="hidden" value="2" name="mode" id="mode">
+					<input type="hidden" value=<%= login %> name="userId">
+					<input type="hidden" value=<%= type %> name="password">
+					<input type="submit" class="user-panel" value="Moj profil"/>
+					</form>
 			<%	}
 			 	else
 				{%>

@@ -52,12 +52,13 @@ public class LoginServlet extends HttpServlet
 						System.out.println("5");
 						Cookie[] cookie = new Cookie[2];
 						cookie[0] = new Cookie("userBean", userBean.getLogin());
-						cookie[1] = new Cookie("passWord", userBean.getHaslo());
+						cookie[1] = new Cookie("type", userBean.getType());
 						cookie[0].setMaxAge(30); 
 						cookie[1].setMaxAge(30);
 						response.addCookie(cookie[0]);
 						response.addCookie(cookie[1]);
-						response.sendRedirect("index.jsp");
+					//	response.sendRedirect("index.jsp");
+						request.getRequestDispatcher("/index.jsp").forward(request, response);
 					}
 					else
 					{
@@ -86,10 +87,11 @@ public class LoginServlet extends HttpServlet
 			}
 			case 2:
 			{
-				
 				String sessionIDL = request.getParameter("userId");
 				String sessionIDH = request.getParameter("password");
 				System.out.println("Wszedlem do sesji i "+sessionIDL+"dsf"+sessionIDH);
+				request.getRequestDispatcher("/userPanel.jsp").forward(request, response);
+				//response.sendRedirect("userPanel.jsp");
 			}
 		}
 	}
