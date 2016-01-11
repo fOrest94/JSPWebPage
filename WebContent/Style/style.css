@@ -238,4 +238,23 @@ ol > li:hover
 	background-color: white;
 }
 
+.user_profil_left_side
+{
+	padding-top: 15mm;
+	width: 460px;
+	height: 200px;	
+	float: left;
+	text-align: center;
+	background-color: green;
+}
+.user_profil_right_side
+{
+	padding-top: 15mm;
+	width: 460px;
+	height: 200px;	
+	float: left;
+	background-color: yellow;
+	text-align: center;
+}
+
 

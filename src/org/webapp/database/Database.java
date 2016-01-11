@@ -133,7 +133,47 @@ public class Database
 						arrlist.add(result.getString("nazwisko"));
 						arrlist.add(result.getString("email"));
 						arrlist.add(result.getString("telefon"));
-						//arrlist.add(result.getString("zdjecie"));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Bl¹d odczytu z bazy! " + e.toString());
+			System.exit(3);
+		}
+		return arrlist;
+	}
+	
+	public ArrayList<String> pokazProfil(ResultSet result, String type) 
+	{
+		ArrayList<String> arrlist = new ArrayList<String>();
+		
+			System.out.println("xdpapa");
+		int licznik = 0;
+		try 
+		{
+			while (result.next()) 
+			{
+				if(type.equals("Pacjent"))
+				{
+					arrlist.add(result.getString("imie"));
+					arrlist.add(result.getString("nazwisko"));
+					arrlist.add(result.getString("PESEL"));
+					arrlist.add(result.getString("email"));
+					arrlist.add(result.getString("login"));
+					arrlist.add(result.getString("haslo"));
+				}
+				else if(type.equals("Specjalista"))
+				{
+					arrlist.add(result.getString("imie"));
+					arrlist.add(result.getString("nazwisko"));
+					arrlist.add(result.getString("email"));
+					arrlist.add(result.getString("telefon"));
+					arrlist.add(result.getString("login"));
+					arrlist.add(result.getString("haslo"));
+					arrlist.add(result.getString("specjalizacja"));
+					arrlist.add(result.getString("miasto"));
+					System.out.println("xdpapa123");
+				}
 			}
 		} 
 		catch (SQLException e) 

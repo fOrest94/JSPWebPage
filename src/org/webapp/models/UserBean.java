@@ -1,5 +1,9 @@
 package org.webapp.models;
 
+import java.util.ArrayList;
+
+import org.webapp.database.Database;
+
 public class UserBean 
 {
 	private String imie;
@@ -112,5 +116,54 @@ public class UserBean
 	public void setType(String type) 
 	{
 		this.type = type;
+	}
+	
+	public ArrayList<String> pokazProfil(String login, String typeOfUser)
+	{
+		Database baza = new Database();
+		String sql = new String();
+		ArrayList<String> listaDanych = new ArrayList<String>();
+		System.out.println("Wchodze do pP"+login+" "+typeOfUser);
+		if(typeOfUser.equals("Pacjent"))
+		{
+			System.out.println("Wchodze do pPP");
+			sql = " select * from pacjenci where login = '"+login+"';";
+			listaDanych = baza.pokazProfil(baza.executeQuery(baza.statement, sql), typeOfUser);
+			setImie(listaDanych.get(0));
+			setNazwisko(listaDanych.get(1));
+			setPESEL(listaDanych.get(2));
+			setEmail(listaDanych.get(3));
+			setLogin(listaDanych.get(4));
+			setHaslo(listaDanych.get(5));
+			return listaDanych;
+			
+		}
+		else if(typeOfUser.equals("Specjalista"))
+		{
+			System.out.println("Wchodze do pPS");
+			sql = " select * from lekarze where login = '"+login+"';";
+			listaDanych = baza.pokazProfil(baza.executeQuery(baza.statement, sql), typeOfUser);
+			setImie(listaDanych.get(0));
+			setNazwisko(listaDanych.get(1));
+			setEmail(listaDanych.get(2));
+			setTelefon(listaDanych.get(3));
+			setLogin(listaDanych.get(4));
+			setHaslo(listaDanych.get(5));
+			setSpecjalizacja(listaDanych.get(6));
+			setMiasto(listaDanych.get(7));
+			return listaDanych;
+		}	
+		System.out.println("NIgdzie nie wchodze");	
+		return listaDanych;
+		
+	}
+	public void zmienLogin(String nowyLogin)
+	{
+		
+	}
+	public boolean walidujLogin(String login)
+	{
+		
+		return true;
 	}
 }

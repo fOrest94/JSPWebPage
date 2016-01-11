@@ -61,10 +61,10 @@
 				<input type="hidden" value="1" name="mode" id="mode">
 				<input type="submit" class="login" value="Log out"/>
 				</form>
-					<form action="userPanel" method="post">
+					<form action="showProfile" method="post">
 					<input type="hidden" value="2" name="mode" id="mode">
-					<input type="hidden" value=<%= login %> name="userId">
-					<input type="hidden" value=<%= type %> name="password">
+					<input type="hidden" value=<%= login %> name="login">
+					<input type="hidden" value=<%= type %> name="typeOfUser">
 					<input type="submit" class="user-panel" value="Moj profil"/>
 					</form>
 			<%	}

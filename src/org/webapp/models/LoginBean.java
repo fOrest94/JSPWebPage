@@ -1,5 +1,7 @@
 package org.webapp.models;
 
+import javax.servlet.http.Cookie;
+
 import org.webapp.database.Database;
 
 public class LoginBean 
@@ -7,8 +9,45 @@ public class LoginBean
 	private String login;
 	private String haslo;
 	private String type;
-	
-	public boolean czyIstnieje(String login, String haslo, String type)
+
+	public LoginBean(String login, String haslo, String type) 
+	{
+		this.login = login;
+		this.haslo = haslo;
+		this.type = type;
+	}
+
+	public String getLogin() 
+	{
+		return login;
+	}
+
+	public void setLogin(String login) 
+	{
+		this.login = login;
+	}
+
+	public String getHaslo() 
+	{
+		return haslo;
+	}
+
+	public void setHaslo(String haslo) 
+	{
+		this.haslo = haslo;
+	}
+
+	public String getType() 
+	{
+		return type;
+	}
+
+	public void setType(String type) 
+	{
+		this.type = type;
+	}
+
+	public boolean czyIstnieje()
 	{
 		Database bazaSQL = new Database();
 		System.out.println("*"+type+"*");
@@ -47,7 +86,7 @@ public class LoginBean
 		return false;
 	}
 	
-	public boolean walidacja(String login, String haslo)
+	public boolean walidacja()
 	{
 		System.out.println("Walidacja sie sypie");
 		if((login.length() < 6) || (haslo.length() < 6))
@@ -55,6 +94,18 @@ public class LoginBean
 			return false;
 		}
 		return true;
+	}
+	
+	public Cookie getCookie(String name, String var)
+	{
+		Cookie cookie = new Cookie(name, var);
+		
+		if(var.equals(""))	
+			cookie.setMaxAge(0); 
+		else
+			cookie.setMaxAge(30);
+		
+		return cookie;
 	}
 	
 	
