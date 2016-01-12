@@ -95,23 +95,93 @@
 					<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="type" >
 					<input type="hidden"  onchange="submit();">
 				</form>
-			<div class="user_profil_left_side">
-			fdgdfgdf
-			</div>
-			<div class="user_profil_right_side">
-				<%
-					
-					out.println("OMG wypisz to : "+request.getAttribute("label"));
-					if(request.getAttribute("rekordy") != null)
-					{
-						ArrayList<String> rekordy = new ArrayList<String>(40);
-						rekordy = (ArrayList<String>) request.getAttribute("rekordy");	
-						for(int i=0;i<rekordy.size();i++)
-						{
-							out.println(rekordy.get(i));
+				
+				<div class="user_profil_left_side">
+					<div class="up">
+						Tu bedzie zdjecie
+					</div>
+					<div class="down">
+							<form action="showProfile" method="post">
+							<input type="hidden" value="2" name="mode" id="mode">
+							<input type="hidden" value=<%= request.getParameter("login") %> name="login">
+							<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
+							<input type="submit" class="ver_menu" value="Profil"/>
+							</form>
+							<form action="showProfile" method="post">
+							<input type="hidden" value="3" name="mode" id="mode">
+							<input type="hidden" value=<%= login %> name="login">
+							<input type="hidden" value=<%= type %> name="typeOfUser">
+							<input type="submit" class="ver_menu" value="Wizyty"/>
+							</form>
+							<form action="showProfile" method="post">
+							<input type="hidden" value="4" name="mode" id="mode">
+							<input type="hidden" value=<%= login %> name="login">
+							<input type="hidden" value=<%= type %> name="typeOfUser">
+							<input type="submit" class="ver_menu" value="Ustawienia"/>
+							</form>
+					</div>
+				</div>
+				<div class="user_profil_right_side">
+					<div class="profile_content">
+					<%
+						ArrayList<String> rekordy = new ArrayList<String>();
+						
+						if(request.getAttribute("label").equals("Pacjent") && request.getAttribute("label")!=null)
+						{	
+							if(request.getAttribute("rekordy") != null)
+							{
+								rekordy = (ArrayList<String>) request.getAttribute("rekordy");	
+								for(int i=0;i<rekordy.size();i++)
+								{
+									if(i==0)		
+								 		out.println("<p>Imie:"+rekordy.get(i)+"</p>");
+									if(i==1)
+										out.println("<p>Nazwisko:"+rekordy.get(i)+"</p>");
+									if(i==2)
+										out.println("<p>Email:"+rekordy.get(i)+"</p>");
+									if(i==3)
+										out.println("<p>Telefon:"+rekordy.get(i)+"</p>");
+									if(i==4)
+										out.println("<p>Login:"+rekordy.get(i)+"</p>");
+									if(i==5)
+										out.println("<p>Haslo:"+rekordy.get(i)+"</p>");
+									if(i==6)
+										out.println("<p>Specjalizacja:"+rekordy.get(i)+"</p>");
+									if(i==7)
+										out.println("<p>Miasto:"+rekordy.get(i)+"</p>");
+								}
+							}
 						}
-					}
-				%>
+						else if(request.getAttribute("label").equals("Specjalista") && request.getAttribute("label")!=null)
+						{	
+							if(request.getAttribute("rekordy") != null)
+							{
+								rekordy = (ArrayList<String>) request.getAttribute("rekordy");	
+								for(int i=0;i<rekordy.size();i++)
+								{
+									if(i==0)
+									{
+										out.println("<p>Imie: "+rekordy.get(i)+"</p>");
+									} 	
+									else if(i==1)
+										out.println("<p>Nazwisko: "+rekordy.get(i)+"</p>");
+									if(i==2)
+										out.println("<p>Email: "+rekordy.get(i)+"</p>");
+									if(i==3)
+										out.println("<p>Telefon: "+rekordy.get(i)+"</p>");
+									if(i==4)
+										out.println("<p>Login: "+rekordy.get(i)+"</p>");
+									if(i==5)
+										out.println("<p>Haslo: "+rekordy.get(i)+"</p>");
+									if(i==6)
+										out.println("<p>Specjalizacja: "+rekordy.get(i)+"</p>");
+									if(i==7)
+										out.println("<p>Miasto: "+rekordy.get(i)+"</p>");
+								}
+							}
+						}
+					%>
+					</div>
 				</div>
 			</div>
 		</div>

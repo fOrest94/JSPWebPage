@@ -88,7 +88,6 @@ public class LoginBean
 	
 	public boolean walidacja()
 	{
-		System.out.println("Walidacja sie sypie");
 		if((login.length() < 6) || (haslo.length() < 6))
 		{
 			return false;

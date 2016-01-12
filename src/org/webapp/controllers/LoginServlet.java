@@ -16,7 +16,7 @@ import org.webapp.models.LoginBean;
 import org.webapp.models.UserBean;
 
 
-@WebServlet(urlPatterns ={"/login" , "/logout", "/showProfile", "/ziomek"})
+@WebServlet(urlPatterns ={"/login" , "/logout", "/showProfile", "/ziomek", "/click1"})
 		//"/znajdzLekarza.jsp" , "/index.jsp" , "/oAutorach.jsp" , "/googleMaps.jsp"})
 
 public class LoginServlet extends HttpServlet 
@@ -77,6 +77,17 @@ public class LoginServlet extends HttpServlet
 				request.setAttribute("label", userBean.getType());
 				request.getRequestDispatcher("/userPanel.jsp").forward(request, response);
 				break;
+			}
+			case 3:
+			{	
+				System.out.println("sadsadsadsad");
+				request.getRequestDispatcher("/userPanel.jsp").forward(request, response);
+				break;
+			}
+			case 4:
+			{
+				System.out.println("Zmien hasla itp");
+				request.getRequestDispatcher("/userPanel.jsp").forward(request, response);
 			}
 		}
 	}
