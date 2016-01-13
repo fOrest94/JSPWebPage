@@ -16,7 +16,17 @@ public class UserBean
 	private String specjalizacja;
 	private String miasto;
 	private String type;
+			
+	public UserBean()
+	{
 		
+	}
+	public UserBean(String login, String type) 
+	{
+		this.login = login;
+		this.type = type;
+	}
+
 	public String getImie() 
 	{
 		return imie;
@@ -123,10 +133,8 @@ public class UserBean
 		Database baza = new Database();
 		String sql = new String();
 		ArrayList<String> listaDanych = new ArrayList<String>();
-		System.out.println("Wchodze do pP"+login+" "+typeOfUser);
 		if(typeOfUser.equals("Pacjent"))
 		{
-			System.out.println("Wchodze do pPP");
 			sql = " select * from pacjenci where login = '"+login+"';";
 			listaDanych = baza.pokazProfil(baza.executeQuery(baza.statement, sql), typeOfUser);
 			setImie(listaDanych.get(0));
@@ -140,7 +148,6 @@ public class UserBean
 		}
 		else if(typeOfUser.equals("Specjalista"))
 		{
-			System.out.println("Wchodze do pPS");
 			sql = " select * from lekarze where login = '"+login+"';";
 			listaDanych = baza.pokazProfil(baza.executeQuery(baza.statement, sql), typeOfUser);
 			setImie(listaDanych.get(0));
@@ -153,17 +160,132 @@ public class UserBean
 			setMiasto(listaDanych.get(7));
 			return listaDanych;
 		}	
-		System.out.println("NIgdzie nie wchodze");	
 		return listaDanych;
 		
 	}
-	public void zmienLogin(String nowyLogin)
+	
+	public boolean sprawdzHaslo(String newPass0, String newPass1)
 	{
+		if(newPass0.equals(newPass1))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean ifTheSame( String newPass0, String newPass1)
+	{
+		if(newPass0.equals(newPass1))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean walidacja(String insert)
+	{
+		if(insert.length() < 6)
+		{
+			return false;
+		}
+		return true;
+	}
+	
+	public String zmienHaslo(String oldPass, String newPass0, String newPass1, String typeOfUser)
+	{
+		Database baza = new Database();
+		String sql = new String();
+		String sprawdz = new String();
+		
+		if(typeOfUser.equals("Pacjent"))
+			typeOfUser = "pacjenci";
+		else if(typeOfUser.equals("Specjalista"))
+			typeOfUser = "lekarze";
+		
+		if(baza.ifCorrectPass(baza, oldPass, typeOfUser))
+		{
+			if(walidacja(newPass0))
+			{
+				if(ifTheSame(newPass0, newPass1))
+				{
+					sql = "UPDATE "+typeOfUser+" SET haslo = '"+newPass0+"' WHERE haslo = '"+oldPass+"';";
+					if(baza.updateUserData(baza.statement, sql))
+					{
+						setHaslo(newPass0);
+						sprawdz = "Pomyslnie zmieniono haslo";
+					}
+					else
+					{
+						sprawdz = "Hasla musza byc identyczne";
+					}
+				}
+				else
+				{
+					sprawdz = "Hasla musza byc identyczne";
+				}
+			}
+			else
+			{
+				sprawdz = "Nowe haslo jest za krotkie";
+			}
+		}
+		else
+		{
+			sprawdz = "Wpisales niepoprawne haslo";
+		}
+	
+		//String SQL = "SELECT * FROM pacjenci WHERE login = '"+login+"' and haslo = '"+haslo+"';";
+		
+		return sprawdz;
 		
 	}
-	public boolean walidujLogin(String login)
+	/*public boolean sprawdzHaslo(Database baza, String typeOfUser, String haslo)
 	{
+		ifPasswordCorrect(baza.statement)
+	}*/
+	public boolean zmienLogin(String oldLogin, String newLogin, String typeOfUser)
+	{	
+		Database baza = new Database();
+		String sql = new String();
 		
-		return true;
+			if(typeOfUser.equals("Pacjent"))
+			{
+				sql = "UPDATE pacjenci SET login = '"+newLogin+"' WHERE login = '"+oldLogin+"';";
+			}
+			else if(typeOfUser.equals("Specjalista"))
+			{
+				sql = "UPDATE lekarze SET login = '"+newLogin+"' WHERE login = '"+oldLogin+"';";
+			}
+		
+		if(baza.updateUserData(baza.statement, sql))
+		{
+			setLogin(newLogin);
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean zmienEmail(String oldEmail, String newEmail, String typeOfUser)
+	{	
+		Database baza = new Database();
+		System.out.println("zmieniam email");
+		String sql = new String();
+		
+			if(typeOfUser.equals("Pacjent"))
+			{
+				sql = "UPDATE pacjenci SET email = '"+newEmail+"' WHERE email = '"+oldEmail+"';";
+			}
+			else if(typeOfUser.equals("Specjalista"))
+			{
+				sql = "UPDATE lekarze SET email = '"+newEmail+"' WHERE email = '"+oldEmail+"';";
+			}
+		if(baza.updateUserData(baza.statement, sql))
+		{
+			setEmail(newEmail);
+			return true;
+		}
+		else
+			return false;
 	}
 }

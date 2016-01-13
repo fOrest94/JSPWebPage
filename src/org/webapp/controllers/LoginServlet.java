@@ -1,6 +1,7 @@
 package org.webapp.controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -32,7 +33,7 @@ public class LoginServlet extends HttpServlet
 	{
 			
 		mode = Integer.valueOf(request.getParameter("mode"));
-
+		System.out.println("mam mode:"+mode);
 		switch(mode)
 		{
 			case 0:
@@ -70,24 +71,10 @@ public class LoginServlet extends HttpServlet
 			}
 			case 2:
 			{	
-				userBean = new UserBean();
-				userBean.setLogin(request.getParameter("login"));
-				userBean.setType(request.getParameter("typeOfUser"));
-				request.setAttribute("rekordy", userBean.pokazProfil(userBean.getLogin(),userBean.getType()));
-				request.setAttribute("label", userBean.getType());
-				request.getRequestDispatcher("/userPanel.jsp").forward(request, response);
-				break;
-			}
-			case 3:
-			{	
-				System.out.println("sadsadsadsad");
-				request.getRequestDispatcher("/userPanel.jsp").forward(request, response);
-				break;
-			}
-			case 4:
-			{
-				System.out.println("Zmien hasla itp");
-				request.getRequestDispatcher("/userPanel.jsp").forward(request, response);
+			    request.setAttribute("login", request.getParameter("login"));
+			    request.setAttribute("typeOfUser", request.getParameter("type"));
+			    request.getRequestDispatcher("SessionServlet").forward(request, response);
+			    break;
 			}
 		}
 	}

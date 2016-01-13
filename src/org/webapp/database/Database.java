@@ -77,6 +77,22 @@ public class Database
 			return false;
 		}
 	}
+	
+	public boolean updateUserData(Statement statement, String zapytanie_sql) 
+	{
+		try
+		{
+			System.out.println("jestem tu ziomek malaka");
+			statement.executeUpdate(zapytanie_sql);
+			return true;
+		}
+		catch (SQLException e) 
+		{
+			System.out.println("metoda nie chodzi");
+			return false;
+		}
+	}
+	
 	public boolean pobierzZBazy(Statement statement, String zapytanie_sql)
 	{
 		try
@@ -207,6 +223,7 @@ public class Database
 		}
 		return true;
 	}
+	
 	public boolean findUserInfo(ResultSet result, String login, String password) 
 	{
 		try 
@@ -214,6 +231,28 @@ public class Database
 			while (result.next()) 
 			{
 				if(result.getString("login").equals(login) && result.getString("haslo").equals(password))
+				{
+					return true;
+				}
+			}
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Bl¹d odczytu z bazy! " + e.toString());
+			System.exit(3);
+		}
+		return false;
+	}
+	
+	public boolean ifCorrectPass(Database baza, String hasloOld, String typeOfUser) 
+	{
+		String sql = "SELECT haslo FROM "+typeOfUser+" WHERE haslo = '"+hasloOld+"';";
+		ResultSet result = baza.executeQuery(baza.statement, sql);
+		try 
+		{
+			while (result.next()) 
+			{
+				if(result.getString("haslo").equals(hasloOld))
 				{
 					return true;
 				}

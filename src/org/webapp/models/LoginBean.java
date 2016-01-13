@@ -50,8 +50,6 @@ public class LoginBean
 	public boolean czyIstnieje()
 	{
 		Database bazaSQL = new Database();
-		System.out.println("*"+type+"*");
-		System.out.println("*"+login+"*"+haslo+"*");
 		if(login.equals("admin") && haslo.equals("admin"))
 		{
 			return true;
@@ -59,9 +57,8 @@ public class LoginBean
 		else if(type.equals("Pacjent"))
 		{
 			String SQL = "SELECT * FROM pacjenci WHERE login = '"+login+"' and haslo = '"+haslo+"';";
-			
 			boolean loginExist = bazaSQL.findUserInfo(bazaSQL.executeQuery(bazaSQL.statement, SQL), login, haslo);
-			System.out.println("4.1");
+
 			if(loginExist)
 			{
 				return true;
@@ -72,9 +69,8 @@ public class LoginBean
 		else if(type.equals("Specjalista"))
 		{
 			String SQL = "SELECT * FROM lekarze WHERE login = '"+login+"' and haslo = '"+haslo+"';";
-			
 			boolean loginExist = bazaSQL.findUserInfo(bazaSQL.executeQuery(bazaSQL.statement, SQL), login, haslo);
-			System.out.println("4.2");
+			
 			if(loginExist)
 			{
 				return true;
@@ -82,7 +78,6 @@ public class LoginBean
 			else
 				return false;
 		}
-		System.out.println("4.3");
 		return false;
 	}
 	

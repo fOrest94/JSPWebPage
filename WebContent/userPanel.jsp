@@ -25,19 +25,15 @@
 	    	{
 	        	if(cookie[i].getName().equals("userBean"))
 	       		{
-	        		System.out.println("pl"+cookie[i].getValue()+"pl");
 	        		login = cookie[i].getValue();
 	        		sesja++;
 	        	}
 	        	else if(cookie[i].getName().equals("type") )
 	       		{
-	        		System.out.println("xd"+cookie[i].getValue()+"xd");
 	        		type = cookie[i].getValue();
 	        		sesja++;
 	        	}
-	        	System.out.println(cookie[i].getValue()+"*"+cookie[i].getName()+"**");
 	    	}
-	    	System.out.println(sesja+" *** ewr3rewrwe");
 	    	if(sesja == 2)
 	    	{
 	    		return true;
@@ -45,7 +41,6 @@
 	 	}
 		return false; 
 	}
-
 %>
 	
 </head>
@@ -58,10 +53,10 @@
 				</form>
 		<% 		if(sprawdzCiasteczko(request))
 				{%>
-				<form action="logout" method="post">
-				<input type="hidden" value="1" name="mode" id="mode">
-				<input type="submit" class="login" value="Log out"/>
-				</form>
+					<form action="logout" method="post">
+					<input type="hidden" value="1" name="mode" id="mode">
+					<input type="submit" class="login" value="Log out"/>
+					</form>
 					<form action="showProfile" method="post">
 					<input type="hidden" value="2" name="mode" id="mode">
 					<input type="hidden" value=<%= login %> name="login">
@@ -89,34 +84,28 @@
 				</ol>
 			</div>
 			<div class="content">
-				<form action="ziomek" method="post">
-					<input type="hidden" value="3" name="mode" >
-					<input type="hidden" value=<%= request.getParameter("login") %> name="login" >
-					<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="type" >
-					<input type="hidden"  onchange="submit();">
-				</form>
 				
 				<div class="user_profil_left_side">
 					<div class="up">
 						Tu bedzie zdjecie
 					</div>
 					<div class="down">
-							<form action="showProfile" method="post">
+							<form action="userProfile" method="post">
 							<input type="hidden" value="2" name="mode" id="mode">
 							<input type="hidden" value=<%= request.getParameter("login") %> name="login">
 							<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
 							<input type="submit" class="ver_menu" value="Profil"/>
 							</form>
-							<form action="showProfile" method="post">
-							<input type="hidden" value="3" name="mode" id="mode">
-							<input type="hidden" value=<%= login %> name="login">
-							<input type="hidden" value=<%= type %> name="typeOfUser">
+							<form action="userProfile" method="post">
+							<input type="hidden" value="1" name="mode" id="mode">
+							<input type="hidden" value=<%= request.getParameter("login") %> name="login">
+							<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
 							<input type="submit" class="ver_menu" value="Wizyty"/>
 							</form>
-							<form action="showProfile" method="post">
-							<input type="hidden" value="4" name="mode" id="mode">
-							<input type="hidden" value=<%= login %> name="login">
-							<input type="hidden" value=<%= type %> name="typeOfUser">
+							<form action="userProfile" method="post">
+							<input type="hidden" value="0" name="mode" id="mode">
+							<input type="hidden" value=<%= request.getParameter("login") %> name="login">
+							<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
 							<input type="submit" class="ver_menu" value="Ustawienia"/>
 							</form>
 					</div>
@@ -124,61 +113,99 @@
 				<div class="user_profil_right_side">
 					<div class="profile_content">
 					<%
-						ArrayList<String> rekordy = new ArrayList<String>();
 						
-						if(request.getAttribute("label").equals("Pacjent") && request.getAttribute("label")!=null)
-						{	
-							if(request.getAttribute("rekordy") != null)
-							{
-								rekordy = (ArrayList<String>) request.getAttribute("rekordy");	
-								for(int i=0;i<rekordy.size();i++)
+						if(Integer.valueOf(request.getParameter("mode")) ==2)
+						{
+							ArrayList<String> rekordy = new ArrayList<String>();
+						
+							if(request.getAttribute("label").equals("Pacjent") && request.getAttribute("label")!=null)
+							{	
+								if(request.getAttribute("rekordy") != null)
 								{
-									if(i==0)		
-								 		out.println("<p>Imie:"+rekordy.get(i)+"</p>");
-									if(i==1)
-										out.println("<p>Nazwisko:"+rekordy.get(i)+"</p>");
-									if(i==2)
-										out.println("<p>Email:"+rekordy.get(i)+"</p>");
-									if(i==3)
-										out.println("<p>Telefon:"+rekordy.get(i)+"</p>");
-									if(i==4)
-										out.println("<p>Login:"+rekordy.get(i)+"</p>");
-									if(i==5)
-										out.println("<p>Haslo:"+rekordy.get(i)+"</p>");
-									if(i==6)
-										out.println("<p>Specjalizacja:"+rekordy.get(i)+"</p>");
-									if(i==7)
-										out.println("<p>Miasto:"+rekordy.get(i)+"</p>");
+									rekordy = (ArrayList<String>) request.getAttribute("rekordy");	
+									for(int i=0;i<rekordy.size();i++)
+									{
+										if(i==0)		
+									 		out.println("<p>Imie:"+rekordy.get(i)+"</p>");
+										if(i==1)
+											out.println("<p>Nazwisko:"+rekordy.get(i)+"</p>");
+										if(i==2)
+											out.println("<p>Email:"+rekordy.get(i)+"</p>");
+										if(i==3)
+											out.println("<p>Telefon:"+rekordy.get(i)+"</p>");
+										if(i==4)
+											out.println("<p>Login:"+rekordy.get(i)+"</p>");
+										if(i==5)
+											out.println("<p>Haslo:"+rekordy.get(i)+"</p>");
+										if(i==6)
+											out.println("<p>Specjalizacja:"+rekordy.get(i)+"</p>");
+										if(i==7)
+											out.println("<p>Miasto:"+rekordy.get(i)+"</p>");
+									}
+								}
+							}
+							else if(request.getAttribute("label").equals("Specjalista") && request.getAttribute("label")!=null)
+							{	
+								if(request.getAttribute("rekordy") != null)
+								{
+									rekordy = (ArrayList<String>) request.getAttribute("rekordy");	
+									for(int i=0;i<rekordy.size();i++)
+									{
+										if(i==0)
+										{
+											out.println("<p>Imie: "+rekordy.get(i)+"</p>");
+										} 	
+										else if(i==1)
+											out.println("<p>Nazwisko: "+rekordy.get(i)+"</p>");
+										if(i==2)
+											out.println("<p>Email: "+rekordy.get(i)+"</p>");
+										if(i==3)
+											out.println("<p>Telefon: "+rekordy.get(i)+"</p>");
+										if(i==4)
+											out.println("<p>Login: "+rekordy.get(i)+"</p>");
+										if(i==5)
+											out.println("<p>Haslo: "+rekordy.get(i)+"</p>");
+										if(i==6)
+											out.println("<p>Specjalizacja: "+rekordy.get(i)+"</p>");
+										if(i==7)
+											out.println("<p>Miasto: "+rekordy.get(i)+"</p>");
+									}
 								}
 							}
 						}
-						else if(request.getAttribute("label").equals("Specjalista") && request.getAttribute("label")!=null)
-						{	
-							if(request.getAttribute("rekordy") != null)
-							{
-								rekordy = (ArrayList<String>) request.getAttribute("rekordy");	
-								for(int i=0;i<rekordy.size();i++)
-								{
-									if(i==0)
-									{
-										out.println("<p>Imie: "+rekordy.get(i)+"</p>");
-									} 	
-									else if(i==1)
-										out.println("<p>Nazwisko: "+rekordy.get(i)+"</p>");
-									if(i==2)
-										out.println("<p>Email: "+rekordy.get(i)+"</p>");
-									if(i==3)
-										out.println("<p>Telefon: "+rekordy.get(i)+"</p>");
-									if(i==4)
-										out.println("<p>Login: "+rekordy.get(i)+"</p>");
-									if(i==5)
-										out.println("<p>Haslo: "+rekordy.get(i)+"</p>");
-									if(i==6)
-										out.println("<p>Specjalizacja: "+rekordy.get(i)+"</p>");
-									if(i==7)
-										out.println("<p>Miasto: "+rekordy.get(i)+"</p>");
-								}
-							}
+						else if(Integer.valueOf(request.getParameter("mode")) == 1)
+						{}
+						else if(Integer.valueOf(request.getParameter("mode")) == 0)
+						{
+							%>
+							<div class="error">${infoMess}</div>
+							<form action="userProfile" method="post">
+							<input type="hidden" value="0" name="mode">
+							<input type="hidden" value="zmienLogin" name="changeSet">
+            				<div class="textplace">Podaj nowy login:</div>
+            				<input type="password" name="newLogin"/>
+							<input type="submit" class="ver_menu" value="Zmien login"/>
+							</form>
+							<form action="userProfile" method="post">
+							<input type="hidden" value="0" name="mode">
+							<input type="hidden" value="zmienHaslo" name="changeSet">
+							<div class="textplace">Podaj stare haslo:</div>
+							<input type="password" name="oldPass"/>
+            				<div class="textplace">Podaj nowe haslo:</div>
+            				<input type="password" name="newPass0"/>
+            				<div class="textplace">Powtorz nowe haslo:</div>
+            				<input type="password" name="newPass1"/>
+							<input type="submit" class="ver_menu" value="Zmien haslo"/>
+							</form>
+							<form action="userProfile" method="post">
+							<input type="hidden" value="0" name="mode">
+							<input type="hidden" value="zmienEmail" name="changeSet">
+							<div class="textplace">Podaj nowy adres email:</div>
+            				<input type="text" name="newEmail"/>
+							<input type="submit" class="ver_menu" value="Zmien email"/>
+							</form>
+							
+							<% 
 						}
 					%>
 					</div>
