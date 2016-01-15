@@ -114,7 +114,7 @@
 					<div class="profile_content">
 					<%
 						
-						if(Integer.valueOf(request.getParameter("mode")) ==2)
+						if(Integer.valueOf(request.getParameter("mode")) == 2)
 						{
 							ArrayList<String> rekordy = new ArrayList<String>();
 						
@@ -204,7 +204,6 @@
             				<input type="text" name="newEmail"/>
 							<input type="submit" class="ver_menu" value="Zmien email"/>
 							</form>
-							
 							<% 
 						}
 					%>

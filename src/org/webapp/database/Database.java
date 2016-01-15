@@ -163,7 +163,7 @@ public class Database
 	{
 		ArrayList<String> arrlist = new ArrayList<String>();
 		
-			System.out.println("xdpapa");
+			System.out.println("2.0"+type);
 		int licznik = 0;
 		try 
 		{
@@ -177,6 +177,7 @@ public class Database
 					arrlist.add(result.getString("email"));
 					arrlist.add(result.getString("login"));
 					arrlist.add(result.getString("haslo"));
+					System.out.println("2.1");
 				}
 				else if(type.equals("Specjalista"))
 				{
@@ -188,7 +189,18 @@ public class Database
 					arrlist.add(result.getString("haslo"));
 					arrlist.add(result.getString("specjalizacja"));
 					arrlist.add(result.getString("miasto"));
-					System.out.println("xdpapa123");
+					System.out.println("2.2");
+				}
+				else if(type.equals("ShowSpecProfile"))
+				{
+					arrlist.add(result.getString("imie"));
+					arrlist.add(result.getString("nazwisko"));
+					arrlist.add(result.getString("email"));
+					arrlist.add(result.getString("telefon"));
+					arrlist.add(result.getString("specjalizacja"));
+					arrlist.add(result.getString("miasto"));
+					arrlist.add(result.getString("opis"));
+					System.out.println("2.3");
 				}
 			}
 		} 

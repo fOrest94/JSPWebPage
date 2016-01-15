@@ -11,6 +11,20 @@ public class ShowSpecBean
 	private String specjalizacja;
 	private String miasto;
 	private ArrayList<String> lista;
+	private String returnStatement;
+	private String type = "ShowSpecProfile";
+	
+	public ShowSpecBean()
+	{
+		
+	}
+	public ShowSpecBean(String imie, String nazwisko, String specjalizacja, String miasto)
+	{
+		this.imie = imie;
+		this.nazwisko = nazwisko;
+		this.specjalizacja = specjalizacja;
+		this.miasto = miasto;
+	}
 	
 	public String getImie() 
 	{
@@ -52,37 +66,34 @@ public class ShowSpecBean
 		this.miasto = miasto;
 	}
 	
-	public String getByNameLabel()
+	public String getReturnStatement() 
 	{
-		return this.imie+", "+this.nazwisko;
+		return "Wyniki dla: "+returnStatement;
 	}
-	
-	public String getNoNameLabel()
+
+	public void setReturnStatement(String returnStatement) 
 	{
-		return this.specjalizacja+", "+this.miasto;
+		this.returnStatement = returnStatement;
 	}
-	
+
 	public ArrayList<String> getNamedRecords()
 	{
-		System.out.println("2.0");
+		Database baza = new Database();
 		if(this.imie.equals("") && !this.nazwisko.equals(""))
 		{
-			System.out.println("2.1");
-			Database baza = new Database();
+			setReturnStatement(this.nazwisko);
 			String pobierzZBazy = "SELECT * FROM `lekarze` WHERE nazwisko = '"+this.nazwisko+"';";
 			this.lista = baza.pokazSpecjalistow(baza.executeQuery(baza.statement, pobierzZBazy));
 		}
 		else if(!this.imie.equals("") && this.nazwisko.equals(""))
 		{
-			System.out.println("2.2");
-			Database baza = new Database();
+			setReturnStatement(this.imie);
 			String pobierzZBazy = "SELECT * FROM `lekarze` WHERE imie = '"+this.imie+"';";
 			this.lista = baza.pokazSpecjalistow(baza.executeQuery(baza.statement, pobierzZBazy));
 		}
 		else if(!this.imie.equals("") && !this.nazwisko.equals(""))
 		{
-			System.out.println("2.3");
-			Database baza = new Database();
+			setReturnStatement(this.imie+" "+this.nazwisko);
 			String pobierzZBazy = "SELECT * FROM `lekarze` WHERE imie = '"+this.imie+"' and nazwisko = '"+this.nazwisko+"';";
 			this.lista = baza.pokazSpecjalistow(baza.executeQuery(baza.statement, pobierzZBazy));
 		}
@@ -90,28 +101,32 @@ public class ShowSpecBean
 	}
 	public ArrayList<String> getNoNamedRecords()
 	{
-		System.out.println("2.0");
+		Database baza = new Database();
 		if(this.miasto.equals("") && this.specjalizacja != null)
 		{
-			System.out.println("2.1");
-			Database baza = new Database();
+			setReturnStatement(this.specjalizacja);
 			String pobierzZBazy = "SELECT * FROM `lekarze` WHERE specjalizacja = '"+this.specjalizacja+"';";
 			this.lista = baza.pokazSpecjalistow(baza.executeQuery(baza.statement, pobierzZBazy));
 		}
 		else if(!this.miasto.equals("") && this.specjalizacja == null)
 		{
-			System.out.println("2.2");
-			Database baza = new Database();
+			setReturnStatement(this.miasto);
 			String pobierzZBazy = "SELECT * FROM `lekarze` WHERE miasto = '"+this.miasto+"';";
 			this.lista = baza.pokazSpecjalistow(baza.executeQuery(baza.statement, pobierzZBazy));
 		}
 		else if(!this.miasto.equals("") && this.specjalizacja != null)
 		{
-			System.out.println("2.3");
-			Database baza = new Database();
+			setReturnStatement(this.specjalizacja+", "+this.miasto);
 			String pobierzZBazy = "SELECT * FROM `lekarze` WHERE miasto = '"+this.miasto+"' and specjalizacja = '"+this.specjalizacja+"';";
 			this.lista = baza.pokazSpecjalistow(baza.executeQuery(baza.statement, pobierzZBazy));
 		}
 		return this.lista;
+	}
+	public ArrayList<String> getSpecialist(String imie, String nazwisko, String email, String telefon)
+	{
+		Database baza = new Database();
+		String sql = "SELECT * FROM `lekarze` WHERE imie = '"+imie+"' and nazwisko = '"+nazwisko+"'and email = '"+email+"' and telefon = '"+telefon+"'";
+		
+		return baza.pokazProfil(baza.executeQuery(baza.statement, sql), type);
 	}
 }

@@ -197,21 +197,19 @@ ol > li:hover
 {
 	margin: 0px 40px 0px 40px;
 	padding-top: 5mm;
-	
 } 
 .content .map
 {
 	margin: 20mm auto 0 auto;
 	position: center;
 	height: 70%; 
-	width : 60%;
-	
+	width : 60%;	
 }
 .searchSpecA
 {
 	padding-top: 15mm;
 	width: 460px;
-	height: 200px;	
+	height: 150px;	
 	float: left;
 	text-align: center;
 }
@@ -224,18 +222,43 @@ ol > li:hover
 {
 	padding-top: 15mm;
 	width: 460px;
-	height: 200px;	
+	height: 150px;	
 	float: left;
-	
 	text-align: center;
 	
 }
 .results
 {
 	clear: both;
-	padding-top: 15mm;
 	height: 400px;
 	background-color: white;
+}
+
+.results .record
+{
+	width: 227.5px;
+	height: 35px;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+	float: left;
+	text-align: center;
+	
+}
+.results .label
+{
+	width: max;
+	padding: 10px 20px 30px 10px;
+}
+
+.result .columnsLabel
+{
+	width: 227.5px;
+	height: 35px;
+	border-right: 2px solid black;
+	border-bottom: 2px solid black;
+	float: left;
+	text-align: center;
+	
 }
 
 .user_profil_left_side

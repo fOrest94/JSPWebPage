@@ -16,15 +16,12 @@ import javax.servlet.http.HttpSession;
 import org.webapp.models.LoginBean;
 import org.webapp.models.UserBean;
 
-
-@WebServlet(urlPatterns ={"/login" , "/logout", "/showProfile", "/ziomek", "/click1"})
-		//"/znajdzLekarza.jsp" , "/index.jsp" , "/oAutorach.jsp" , "/googleMaps.jsp"})
+@WebServlet(urlPatterns ={"/login" , "/logout", "/showProfile"})
 
 public class LoginServlet extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
 	private LoginBean bean;
-	private UserBean userBean;
 	private boolean waliduj;
 	private boolean czyIstnieje;
 	private int mode;
