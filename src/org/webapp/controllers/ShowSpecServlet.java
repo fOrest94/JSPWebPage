@@ -78,8 +78,7 @@ public class ShowSpecServlet extends HttpServlet
 			{
 				bean = new ShowSpecBean();
 				lista = new ArrayList<String>();
-				lista = bean.getSpecialist(request.getParameter("imie"), request.getParameter("nazwisko"),
-						request.getParameter("email"), request.getParameter("telefon"));
+				lista = bean.getSpecialist(request.getParameter("id_specjalisty"));
 				request.setAttribute("mode", mode);
 				request.setAttribute("spec", lista);
 				request.getRequestDispatcher("znajdzLekarza.jsp").forward(request, response);

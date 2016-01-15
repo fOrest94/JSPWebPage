@@ -124,7 +124,6 @@ public class Database
 	
 	public ArrayList<String> pokazSpecjalistow(ResultSet result) 
 	{
-		System.out.print("printDataFromQuery");
 		ResultSetMetaData rsmd;
 		ArrayList<String> arrlist = new ArrayList<String>();
 		int licznik = 0;
@@ -145,6 +144,7 @@ public class Database
 			}
 			while (result.next()) 
 			{
+						arrlist.add(result.getString("id_specjalisty"));
 						arrlist.add(result.getString("imie"));
 						arrlist.add(result.getString("nazwisko"));
 						arrlist.add(result.getString("email"));

@@ -122,10 +122,10 @@ public class ShowSpecBean
 		}
 		return this.lista;
 	}
-	public ArrayList<String> getSpecialist(String imie, String nazwisko, String email, String telefon)
+	public ArrayList<String> getSpecialist(String id)
 	{
 		Database baza = new Database();
-		String sql = "SELECT * FROM `lekarze` WHERE imie = '"+imie+"' and nazwisko = '"+nazwisko+"'and email = '"+email+"' and telefon = '"+telefon+"'";
+		String sql = "SELECT * FROM `lekarze` WHERE id_specjalisty = '"+id+"'";
 		
 		return baza.pokazProfil(baza.executeQuery(baza.statement, sql), type);
 	}

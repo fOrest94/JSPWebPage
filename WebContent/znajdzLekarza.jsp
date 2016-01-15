@@ -133,52 +133,39 @@
 		
 								for(int i=0;i<rekordy.size();i++)
 								{
-									if(licznik == 4)
+									if(i < 5 && licznik == 4)
 									{
 										%><br><% 
 										licznik = 0;	
 									}
-									if(i<4)
+									if(i > 4 && licznik == 5)
 									{
-										%><div class = "record"><%out.println(rekordy.get(i));%></div><%
+										%><br><% 
+										licznik = 0;	
 									}
-									else if(i>3)
+									if(i > 3)
 									{
 										if(licznik == 0)
 										{%>
 											<form action="showSpecialist" method="post">
 											<input type="hidden" value="2" name="mode">
-											<div class = "record"><input type="submit" value="<%=rekordy.get(i)%>"  name = "imie"/></div>
+											<input type="hidden" value="<%=rekordy.get(i)%>"  name = "id_specjalisty"/>
 										<%
 										licznik++;
 										continue;
 										}
 										if(licznik == 1)
 										{%>
-											<div class = "record"><%out.println(rekordy.get(i));%></div>
-											<input type="hidden" value="<%=rekordy.get(i)%>" name="nazwisko">
-										<%
-										licznik++;
-										continue;
-										}
-										if(licznik == 2)
-										{%>
-											<div class = "record"><%out.println(rekordy.get(i));%></div>
-											<input type="hidden" value="<%=rekordy.get(i)%>" name="email">
-										<%
-										licznik++;
-										continue;
-										}
-										if(licznik == 3)
-										{%>
-											<div class = "record"><%out.println(rekordy.get(i));%></div>
-											<input type="hidden" value="<%=rekordy.get(i)%>" name="telefon">
+											<div class = "record"><input type="submit" value="<%=rekordy.get(i)%>"  name = "name"/></div>
 											</form>
 										<%
 										licznik++;
 										continue;
-										}		
-									}
+										}
+												
+									}%>
+									<div class = "record"><%out.println(rekordy.get(i));%></div><%
+									licznik++;
 								}
 							}
 						}
