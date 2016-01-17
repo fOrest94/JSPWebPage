@@ -149,8 +149,22 @@ public class ShowSpecBean
 		return baza.pokazProfil(baza.executeQuery(baza.statement, sql0),"ShowPlaceInfo");
 	}
 	
-	public String zapiszDoBazy(String id_specjalisty, String PESEL, String typ_wizyty, String miejsce_wizyty, String termin_wizyty)
+	public boolean zapiszDoBazy(String PESEL,int id_specjalisty, String typ_wizyty, String miejsce_wizyty, String termin_wizyty, String dolegliwosci)
 	{
+		Database baza = new Database();
+		boolean sprawdz;
+		String sql = "insert into wizyta(PESEL,id_specjalisty,typ_wizyty,miejsce_wizyty,termin_wizyty,dolegliwosci) values ('"+PESEL+"','"+id_specjalisty+"','"+typ_wizyty+"','"+miejsce_wizyty+"','"+termin_wizyty+"','"+dolegliwosci+"';";
+		
+		sprawdz = baza.dodajDoBazy(baza.statement, sql);
+		if(sprawdz)
+		{
+			return true;
+		}
+		else
+		{
+			System.out.println("dodanieWizyty false");
+			return false;
+		}
 		
 	}
 }

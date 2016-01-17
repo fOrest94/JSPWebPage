@@ -16,7 +16,16 @@ public class UserBean
 	private String specjalizacja;
 	private String miasto;
 	private String type;
+	private String id_specjalisty;
 			
+	public String getId_specjalisty() 
+	{
+		return id_specjalisty;
+	}
+	public void setId_specjalisty(String id_specjalisty) 
+	{
+		this.id_specjalisty = id_specjalisty;
+	}
 	public UserBean()
 	{
 		
@@ -234,15 +243,9 @@ public class UserBean
 			sprawdz = "Wpisales niepoprawne haslo";
 		}
 	
-		//String SQL = "SELECT * FROM pacjenci WHERE login = '"+login+"' and haslo = '"+haslo+"';";
-		
-		return sprawdz;
-		
+		return sprawdz;	
 	}
-	/*public boolean sprawdzHaslo(Database baza, String typeOfUser, String haslo)
-	{
-		ifPasswordCorrect(baza.statement)
-	}*/
+	
 	public boolean zmienLogin(String oldLogin, String newLogin, String typeOfUser)
 	{	
 		Database baza = new Database();
@@ -287,5 +290,20 @@ public class UserBean
 		}
 		else
 			return false;
+	}
+	public ArrayList<String> pobierzWizyty()
+	{
+		Database baza = new Database();
+		String sql = new String();
+				
+			if(getType().equals("Pacjent"))
+			{
+				sql = "SELECT * FROM `wizyty` INNER JOIN pacjenci where wizyty.PESEL '"+getPESEL()+"'";
+			}
+			else if(getType().equals("Specjalista"))
+			{
+				sql = "SELECT * FROM `wizyty` INNER JOIN lekarze where wizyty.id_specjalisty = '"+getId_specjalisty()+"'";
+			}
+			return baza.pokazProfil(baza.executeQuery(baza.statement, sql), getType()+"W");
 	}
 }

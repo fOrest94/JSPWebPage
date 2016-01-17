@@ -64,7 +64,7 @@ public class Database
 		return null;
 	}
 
-	public boolean dodajUzytkownika(Statement statement, String zapytanie_sql) 
+	public boolean dodajDoBazy(Statement statement, String zapytanie_sql) 
 	{
 		try
 		{
@@ -188,6 +188,7 @@ public class Database
 					arrlist.add(result.getString("haslo"));
 					arrlist.add(result.getString("specjalizacja"));
 					arrlist.add(result.getString("miasto"));
+					arrlist.add(result.getString("id_specjalisty"));
 				}
 				else if(type.equals("ShowSpecProfile"))
 				{
@@ -212,6 +213,28 @@ public class Database
 					arrlist.add(result.getString("nazwa"));
 					arrlist.add(result.getString("miasto"));
 					arrlist.add(result.getString("ulica"));
+				}
+				else if(type.equals("PacjentW"))
+				{
+					Database baza = new Database();
+					String sql = "SELECT Imie,Nazwisko from lekarze where id_specjalisty = '"+result.getString("id_specjalisty")+"';";
+					arrlist = baza.pokazProfil(baza.executeQuery(baza.statement, sql), sql);
+					arrlist.add(result.getString("typ_wizyty"));
+					arrlist.add(result.getString("miejsce_wizyty"));
+					arrlist.add(result.getString("termin_wizyty"));
+					arrlist.add(result.getString("dolegliwosci"));
+				}
+				else if(type.equals("SpecjalistaW"))
+				{
+					System.out.println("2dsdf342");
+					Database baza = new Database();
+					String sql = "SELECT imie,nazwisko from pacjenci where PESEL = '"+result.getString("PESEL")+"';";
+					arrlist = baza.pokazProfil(baza.executeQuery(baza.statement, sql), sql);
+					arrlist.add(result.getString("PESEL"));
+					arrlist.add(result.getString("typ_wizyty"));
+					arrlist.add(result.getString("miejsce_wizyty"));
+					arrlist.add(result.getString("termin_wizyty"));
+					arrlist.add(result.getString("dolegliwosci"));
 				}
 				System.out.println("2.5");
 			}

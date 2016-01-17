@@ -16,7 +16,7 @@ public class RegistryBean
 			String rejestruj = "insert into pacjenci values('"+userBean.getImie()+"','"+userBean.getNazwisko()+"','"+userBean.getPESEL()+"','"+userBean.getEmail()+"','"+userBean.getLogin()+"','"+userBean.getHaslo()+"');";
 			System.out.println(rejestruj);
 			
-			sprawdz = baza.dodajUzytkownika(baza.statement, rejestruj);
+			sprawdz = baza.dodajDoBazy(baza.statement, rejestruj);
 			if(sprawdz)
 			{
 				return true;
@@ -32,7 +32,7 @@ public class RegistryBean
 			String rejestruj = "insert into lekarze values('"+userBean.getImie()+"','"+userBean.getNazwisko()+"','"+userBean.getEmail()+"','"+userBean.getTelefon()+"','"+userBean.getLogin()+"','"+userBean.getHaslo()+"','"+userBean.getSpecjalizacja()+"','"+userBean.getMiasto()+");";
 			System.out.println(rejestruj);
 			
-			sprawdz = baza.dodajUzytkownika(baza.statement, rejestruj);
+			sprawdz = baza.dodajDoBazy(baza.statement, rejestruj);
 			if(sprawdz)
 			{
 				return true;

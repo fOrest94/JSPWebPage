@@ -262,7 +262,7 @@
 					  <script src="js/controllers/dupaCtrl.js"></script></form>
 					<%}	
 				}
-				else if(Integer.valueOf(request.getParameter))
+				//else if(Integer.valueOf(request.getParameter))
 				%>
 				</div>
 			</div>

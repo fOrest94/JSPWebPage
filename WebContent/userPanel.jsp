@@ -174,7 +174,19 @@
 							}
 						}
 						else if(Integer.valueOf(request.getParameter("mode")) == 1)
-						{}
+						{
+							ArrayList<String> rekordy = new ArrayList<String>();
+							
+								if(request.getAttribute("getWizyty") != null)
+								{
+									rekordy = (ArrayList<String>) request.getAttribute("getWizyty");	
+									for(int i=0;i<rekordy.size();i++)
+									{
+										
+											out.println("<p>*:"+rekordy.get(i)+"</p>");
+									}
+								}
+						}
 						else if(Integer.valueOf(request.getParameter("mode")) == 0)
 						{
 							%>

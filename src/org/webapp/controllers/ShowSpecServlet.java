@@ -118,7 +118,16 @@ public class ShowSpecServlet extends HttpServlet
 			}
 			case 4:
 			{
-				
+				bean = new ShowSpecBean();
+				if(bean.zapiszDoBazy("",9,"","","",""))
+				{
+					request.getRequestDispatcher("znajdzLekarza.jsp").forward(request, response);	
+				}
+				else
+				{
+					request.setAttribute("error", "Blad podczas dodawania wizyty");
+					request.getRequestDispatcher("znajdzLekarza.jsp").forward(request, response);	
+				}
 			}
 		}
 	}
