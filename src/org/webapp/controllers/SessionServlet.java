@@ -77,9 +77,8 @@ public class SessionServlet extends HttpServlet
 		 	}
 		 	case 1:
 			{
-				request.setAttribute("getWizyty",userBean.pobierzWizyty());
-				for(int i=0;i<userBean.pobierzWizyty().size();i++)
-					System.out.println(userBean.pobierzWizyty().get(i));
+				request.setAttribute("mode", mode);
+				request.setAttribute("setWizyty",userBean.pobierzWizyty());
 				request.getRequestDispatcher("/userPanel.jsp").forward(request, response);
 				break;
 		 	}

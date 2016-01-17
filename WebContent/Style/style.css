@@ -293,6 +293,17 @@ ol > li:hover
 	margin: 20px 40px 20px 60px;
 }
 
+.user_profil_right_side .viewWizyta
+{
+	width: 115px;
+	height: 35px;
+	font-size: 14px;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+	float: left;
+	text-align: center;
+	
+}
 .ver_menu 
 {
 	-webkit-border-radius: 0;

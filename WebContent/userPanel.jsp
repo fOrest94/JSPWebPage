@@ -171,24 +171,47 @@
 											out.println("<p>Miasto: "+rekordy.get(i)+"</p>");
 									}
 								}
-							}
+							}%></div><%
 						}
 						else if(Integer.valueOf(request.getParameter("mode")) == 1)
 						{
 							ArrayList<String> rekordy = new ArrayList<String>();
-							
-								if(request.getAttribute("getWizyty") != null)
+							System.out.println("witamy na salonach");
+							if(request.getAttribute("setWizyty") != null)
+							{
+								System.out.println("witamy na salonach");
+							ArrayList<String> listaWizyt = new ArrayList<String>(40);
+								listaWizyt = (ArrayList<String>) request.getAttribute("setWizyty");
+								int licznik = 0;
+					
+								for(int i=0;i<listaWizyt.size();i++)
 								{
-									rekordy = (ArrayList<String>) request.getAttribute("getWizyty");	
-									for(int i=0;i<rekordy.size();i++)
+									if(licznik == 6)
 									{
+										%><br><%
+										licznik = 0;
 										
-											out.println("<p>*:"+rekordy.get(i)+"</p>");
 									}
+									else if(licznik == 0)
+									{
+										licznik++;
+										continue;
+									}
+									else if(licznik == 1)
+									{
+										%><div class="viewWizyta"><%out.println(listaWizyt.get((i-1))+" "+listaWizyt.get(i)); %></div><%
+									}
+									else
+									{
+										%><div class="viewWizyta"><%out.println(listaWizyt.get(i)); %></div><%
+									}
+									licznik++;
 								}
+							}
 						}
 						else if(Integer.valueOf(request.getParameter("mode")) == 0)
 						{
+							%><div class="profile_content"><%
 							%>
 							<div class="error">${infoMess}</div>
 							<form action="userProfile" method="post">

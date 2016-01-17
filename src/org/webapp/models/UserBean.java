@@ -167,6 +167,7 @@ public class UserBean
 			setHaslo(listaDanych.get(5));
 			setSpecjalizacja(listaDanych.get(6));
 			setMiasto(listaDanych.get(7));
+			setId_specjalisty(listaDanych.get(8));
 			return listaDanych;
 		}	
 		return listaDanych;
@@ -295,15 +296,16 @@ public class UserBean
 	{
 		Database baza = new Database();
 		String sql = new String();
-				
+		System.out.println("id ziomala*"+getPESEL()+"*"+getId_specjalisty()+"***");
 			if(getType().equals("Pacjent"))
 			{
-				sql = "SELECT * FROM `wizyty` INNER JOIN pacjenci where wizyty.PESEL '"+getPESEL()+"'";
+				sql = "SELECT * FROM `wizyty` where wizyty.PESEL = '"+getPESEL()+"'";
 			}
 			else if(getType().equals("Specjalista"))
 			{
 				sql = "SELECT * FROM `wizyty` INNER JOIN lekarze where wizyty.id_specjalisty = '"+getId_specjalisty()+"'";
 			}
+			
 			return baza.pokazProfil(baza.executeQuery(baza.statement, sql), getType()+"W");
 	}
 }

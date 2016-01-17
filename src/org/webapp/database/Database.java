@@ -37,8 +37,8 @@ public class Database
 	{
 		System.out.print("\nLaczenie z baza danych:");
 		String baza = "jdbc:mysql://" + adress + "/" + dataBaseName;
-		
 		java.sql.Connection connection = null;
+		
 		try 
 		{
 			connection = DriverManager.getConnection(baza, userName, password);
@@ -82,7 +82,6 @@ public class Database
 	{
 		try
 		{
-			System.out.println("jestem tu ziomek malaka");
 			statement.executeUpdate(zapytanie_sql);
 			return true;
 		}
@@ -164,6 +163,7 @@ public class Database
 		ArrayList<String> arrlist = new ArrayList<String>();
 		
 			System.out.println("2.0"+type);
+			System.out.println("*"+type+"*");
 		int licznik = 0;
 		try 
 		{
@@ -216,9 +216,11 @@ public class Database
 				}
 				else if(type.equals("PacjentW"))
 				{
+					ArrayList<String> arraylistIN = new ArrayList<String>(2);
 					Database baza = new Database();
 					String sql = "SELECT Imie,Nazwisko from lekarze where id_specjalisty = '"+result.getString("id_specjalisty")+"';";
-					arrlist = baza.pokazProfil(baza.executeQuery(baza.statement, sql), sql);
+					arraylistIN = baza.pokazProfil(baza.executeQuery(baza.statement, sql), "getIN");
+					arrlist.addAll(arraylistIN);
 					arrlist.add(result.getString("typ_wizyty"));
 					arrlist.add(result.getString("miejsce_wizyty"));
 					arrlist.add(result.getString("termin_wizyty"));
@@ -226,18 +228,26 @@ public class Database
 				}
 				else if(type.equals("SpecjalistaW"))
 				{
-					System.out.println("2dsdf342");
+					ArrayList<String> arraylistIN = new ArrayList<String>(2);
 					Database baza = new Database();
 					String sql = "SELECT imie,nazwisko from pacjenci where PESEL = '"+result.getString("PESEL")+"';";
-					arrlist = baza.pokazProfil(baza.executeQuery(baza.statement, sql), sql);
-					arrlist.add(result.getString("PESEL"));
+					arraylistIN = baza.pokazProfil(baza.executeQuery(baza.statement, sql), "getIN");
+					arrlist.addAll(arraylistIN);
 					arrlist.add(result.getString("typ_wizyty"));
 					arrlist.add(result.getString("miejsce_wizyty"));
 					arrlist.add(result.getString("termin_wizyty"));
 					arrlist.add(result.getString("dolegliwosci"));
 				}
+				else if(type.equals("getIN"))
+				{
+					arrlist.add(result.getString("imie"));
+					arrlist.add(result.getString("nazwisko"));	
+				}
 				System.out.println("2.5");
+				licznik++;
 			}
+			for(int i = 0 ; i<arrlist.size();i++)
+				System.out.println(arrlist.get(i));
 		} 
 		catch (SQLException e) 
 		{
@@ -311,6 +321,5 @@ public class Database
 			System.exit(3);
 		}
 		return false;
-	}
-	
+	}	
 }
