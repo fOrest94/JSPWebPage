@@ -122,11 +122,35 @@ public class ShowSpecBean
 		}
 		return this.lista;
 	}
+	
 	public ArrayList<String> getSpecialist(String id)
 	{
 		Database baza = new Database();
 		String sql = "SELECT * FROM `lekarze` WHERE id_specjalisty = '"+id+"'";
 		
 		return baza.pokazProfil(baza.executeQuery(baza.statement, sql), type);
+	}
+	
+	public String getIdUser(String login, String type)
+	{
+		String sql = "SELECT PESEL FROM pacjenci WHERE login = '"+login+"';";
+		Database baza = new Database();
+	
+				System.out.println("kurwa pokaz to :"+baza.pokazProfil(baza.executeQuery(baza.statement,sql), type+"PESEL").get(0));
+				return baza.pokazProfil(baza.executeQuery(baza.statement,sql), type+"PESEL").get(0);
+	}
+	
+	public ArrayList<String> getPlaceInfo(String id_uzytkownika)
+	{
+		Database baza = new Database();
+		String sql = "select id_placowki from lekarze where id_specjalisty = '"+id_uzytkownika+"';";
+		String sql0 = "SELECT placowki.nazwa, placowki.miasto, placowki.ulica from placowki where placowki.id_placowki = "
+				+ "'"+baza.pokazProfil(baza.executeQuery(baza.statement, sql),"SpecjalistaId_Placowki").get(0)+"';";
+		return baza.pokazProfil(baza.executeQuery(baza.statement, sql0),"ShowPlaceInfo");
+	}
+	
+	public String zapiszDoBazy(String id_specjalisty, String PESEL, String typ_wizyty, String miejsce_wizyty, String termin_wizyty)
+	{
+		
 	}
 }

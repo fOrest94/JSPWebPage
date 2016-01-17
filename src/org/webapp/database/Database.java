@@ -177,7 +177,6 @@ public class Database
 					arrlist.add(result.getString("email"));
 					arrlist.add(result.getString("login"));
 					arrlist.add(result.getString("haslo"));
-					System.out.println("2.1");
 				}
 				else if(type.equals("Specjalista"))
 				{
@@ -189,7 +188,6 @@ public class Database
 					arrlist.add(result.getString("haslo"));
 					arrlist.add(result.getString("specjalizacja"));
 					arrlist.add(result.getString("miasto"));
-					System.out.println("2.2");
 				}
 				else if(type.equals("ShowSpecProfile"))
 				{
@@ -200,8 +198,22 @@ public class Database
 					arrlist.add(result.getString("specjalizacja"));
 					arrlist.add(result.getString("miasto"));
 					arrlist.add(result.getString("opis"));
-					System.out.println("2.3");
 				}
+				else if(type.equals("PacjentPESEL"))
+				{
+					arrlist.add(result.getString("PESEL"));
+				}
+				else if(type.equals("SpecjalistaId_Placowki"))
+				{
+					arrlist.add(result.getString("id_placowki"));
+				}
+				else if(type.equals("ShowPlaceInfo"))
+				{
+					arrlist.add(result.getString("nazwa"));
+					arrlist.add(result.getString("miasto"));
+					arrlist.add(result.getString("ulica"));
+				}
+				System.out.println("2.5");
 			}
 		} 
 		catch (SQLException e) 

@@ -97,7 +97,7 @@ public class LoginBean
 		if(var.equals(""))	
 			cookie.setMaxAge(0); 
 		else
-			cookie.setMaxAge(30);
+			cookie.setMaxAge(300);
 		
 		return cookie;
 	}

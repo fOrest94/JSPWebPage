@@ -15,7 +15,7 @@ import org.webapp.database.Database;
 import org.webapp.models.ShowSpecBean;
 
 
-@WebServlet(urlPatterns ={"/znajdzLekarza", "/showSpecialist"})
+@WebServlet(urlPatterns ={"/znajdzLekarza", "/showSpecialist", "/setWizyta"})
 
 public class ShowSpecServlet extends HttpServlet 
 {
@@ -70,19 +70,55 @@ public class ShowSpecServlet extends HttpServlet
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		
+
 		mode = Integer.valueOf(request.getParameter("mode"));
 		switch(mode)
 		{
+			/**
+			 * sluzy do wyswietlania konkretnego specjalisty z bazy
+			 */
 			case 2:
 			{
 				bean = new ShowSpecBean();
-				lista = new ArrayList<String>();
-				lista = bean.getSpecialist(request.getParameter("id_specjalisty"));
 				request.setAttribute("mode", mode);
-				request.setAttribute("spec", lista);
+				request.setAttribute("spec", bean.getSpecialist(request.getParameter("id_specjalisty")));
+				request.setAttribute("id_specjalisty", request.getParameter("id_specjalisty"));
 				request.getRequestDispatcher("znajdzLekarza.jsp").forward(request, response);
 				break;
+			}
+			/**
+			 * sluzy do tworzenia formularzu wizyty
+			 */
+			case 3:
+			{	
+				if(request.getParameter("login").equals("null") && request.getParameter("type").equals("null"))
+				{
+					request.setAttribute("mode", "2");
+					request.setAttribute("rekordy","Tylko zalogowani uzytkownicy moga korzystac z opcji \" Umow Wizyte \"");
+					request.getRequestDispatcher("login.jsp").forward(request, response);		
+				}
+				else if( request.getParameter("type").equals("Specjalista"))
+				{
+					request.setAttribute("mode", "2");
+					request.setAttribute("rekordy","Zaloguj sie jako Pacjent aby skorzystac z opcji \" Umow Wizyte \"");
+					request.getRequestDispatcher("login.jsp").forward(request, response);		
+				}
+				else if(request.getParameter("login") != null && request.getParameter("type") != null)
+				{
+					bean = new ShowSpecBean();
+					request.setAttribute("mode", mode);
+					request.setAttribute("placeInfo", bean.getPlaceInfo(request.getParameter("id_specjalisty")));
+					request.setAttribute("PESEL", bean.getIdUser(request.getParameter("login"), request.getParameter("type")));
+					request.setAttribute("id_specjalisty",request.getParameter("id_specjalisty"));
+					request.setAttribute("imie", request.getParameter("imie"));
+					request.setAttribute("nazwisko", request.getParameter("nazwisko"));
+					request.setAttribute("miejsce", request.getParameter("miejsce"));
+					request.getRequestDispatcher("znajdzLekarza.jsp").forward(request, response);		
+				}
+			}
+			case 4:
+			{
+				
 			}
 		}
 	}
