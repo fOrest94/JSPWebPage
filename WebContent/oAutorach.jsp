@@ -81,13 +81,32 @@
 				<li><a href="index.jsp">Strona glowna</a></li>
 				<li><a href="znajdzLekarza.jsp">Znajdz lekarza</a></li>
 				<li><a href="googleMaps.jsp">Znajdz placowke</a></li>
-				<li><a href="oAutorach.jsp">O Autorach</a></li>
+				<li><a href="oAutorach.jsp">O Nas</a></li>
 			
 				</ol>
 			</div>
-			<div class="content">
-			<p>Stronka zrobiona przez super ziomka Dudsona Rapera i jeszcze bardziej oldschoolowego G4CU!!</p>
-			   
+			<div class="content" name="specjalnosc">
+				<div class="contactSideLeft">
+					<h2>Dane firmy</h2>
+					<h3>SAISP Sp. z o. o.</h3>
+					ul. Kowala 5</br>
+					31-866 Krakow</br>
+					Polska</br></br>
+					
+					NIP: 4576454654</br>
+					KRS: 000045654</br>
+				</div>
+				<div class="contactSideRight">
+					<form action="" method="post">
+    					<select name="specjalizacja">
+        					<option disabled selected value="wybierz">wybierz</option>
+  							<option value="specjalista">Specjalista</option>
+ 							<div class="pasteOpis"><option value="pacjent">Pacjent</option></div>
+						</select>
+    					<input type="text" name="email" placeholder="email"/>
+    					<div class="spec_describe"><input type="text" name="tresc" placeholder="tresc"/></div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</body>

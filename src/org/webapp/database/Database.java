@@ -158,6 +158,29 @@ public class Database
 		return arrlist;
 	}
 	
+	public ArrayList<String> getMarkers(ResultSet result) 
+	{
+		ArrayList<String> arrlist = new ArrayList<String>();
+		int licznik = 0;
+		try 
+		{
+			while (result.next()) 
+			{
+						arrlist.add(result.getString("id"));
+						arrlist.add(result.getString("name"));
+						arrlist.add(result.getString("address"));
+						arrlist.add(result.getString("lat"));
+						arrlist.add(result.getString("lng"));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Bl¹d odczytu z bazy! " + e.toString());
+			System.exit(3);
+		}
+		return arrlist;
+	}
+	
 	public ArrayList<String> pokazProfil(ResultSet result, String type) 
 	{
 		ArrayList<String> arrlist = new ArrayList<String>();

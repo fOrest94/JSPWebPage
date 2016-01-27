@@ -303,7 +303,7 @@ public class UserBean
 			}
 			else if(getType().equals("Specjalista"))
 			{
-				sql = "SELECT * FROM `wizyty` INNER JOIN lekarze where wizyty.id_specjalisty = '"+getId_specjalisty()+"'";
+				sql = "SELECT * FROM `wizyty` where wizyty.id_specjalisty = '"+getId_specjalisty()+"'";
 			}
 			
 			return baza.pokazProfil(baza.executeQuery(baza.statement, sql), getType()+"W");

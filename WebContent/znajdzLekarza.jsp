@@ -12,7 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/Style/style.css" type="text/css"/>
-<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<link rel="stylesheet" href="{pageContext.request.contextPath}/Style/bootstrap.min.css"/>
 <title>System asygnacji i segregacji pacjentow</title>
 
 <%! 
@@ -86,7 +86,7 @@
 				<li><a href="index.jsp">Strona glowna</a></li>
 				<li><a href="znajdzLekarza.jsp">Znajdz lekarza</a></li>
 				<li><a href="googleMaps.jsp">Znajdz placowke</a></li>
-				<li><a href="oAutorach.jsp">O Autorach</a></li>
+				<li><a href="oAutorach.jsp">O Nas</a></li>
 				</ol>
 			</div>
 			<div class="content" name="specjalnosc" >
@@ -184,7 +184,7 @@
 								<input type="hidden" value="<%= type %>" name="type"/>
 								<input type="hidden" value=<%= request.getParameter("id_specjalisty")%> name="id_specjalisty" />
 								<input type="submit" class="wizyta" value="Umow Wizyte"/>	
-											
+										
 							</div>
 						</div><%
 						%><div class = "show_spec_right_side"><%
@@ -222,49 +222,48 @@
 								%><p>Opis:</p><div class="spec_describe"><%out.println(rekordy.get(i)); %></div><%
 							}
 						}
+						%></div><%
 					}
 					else if(Integer.valueOf(request.getParameter("mode")) == 3)
 					{
-						%><form action="sendWizyta" method="post">
-						<p>Specjalista : <% out.println(request.getParameter("imie")+" "+request.getParameter("nazwisko")); %></p>
-						<p>PESEL : <% out.println((String)request.getAttribute("PESEL"));%></p>
+						%>
+						<div class="wizytaForm">
+						<form action="sendWizyta" method="post">
+							<p>Specjalista : <% out.println(request.getParameter("imie")+" "+request.getParameter("nazwisko")); %></p>
+							<p>PESEL : <% out.println((String)request.getAttribute("PESEL"));%></p>
+								
+								<p>Typ wizyty : <select name="typWizyty" onchange="submit();">
+									<option disabled selected value="wybierz">wybierz</option>
+		  							<option value="prywatna">Prywatna</option>
+		 							<option value="publiczna">Narodowy Fundusz Zdrowia</option>
+		  							</select></br>
+		  						</p>
+							<p>Miejsce wizyty: <% 
 							
-							<p>Typ wizyty : <select name="typWizyty" onchange="submit();">
-								<option disabled selected value="wybierz">wybierz</option>
-	  							<option value="prywatna">Prywatna</option>
-	 							<option value="publiczna">Narodowy Fundusz Zdrowia</option>
-	  							</select></br>
-	  						</p>
-						<p>Miejsce wizyty: <% 
-						
-						ArrayList<String> rekordy = new ArrayList<String>(40);
-						rekordy = (ArrayList<String>) request.getAttribute("placeInfo");
-						for(int i = 0 ;i < rekordy.size();i++)
-						{
-							out.println(rekordy.get(i));
+							ArrayList<String> rekordy = new ArrayList<String>(40);
+							rekordy = (ArrayList<String>) request.getAttribute("placeInfo");
+							for(int i = 0 ;i < rekordy.size();i++)
+							{
+								out.println(rekordy.get(i));
+							}%>
+							</p> 
+							<p>Termin wizyty:
+						      		<input ng-model="departureDate" type="text"
+						             datepicker-popup="yyyy-MM-dd" datepickerOptions="dateOptions"
+						             is-open="false" ng-click="data.isOpen = true"
+						             class="validate form-control" READONLY required placeholder="wybierz">
+							</p>
+							<input type="submit" class="wizyta" value="Umow Wizyte"/>	
+					  	</form>
+							<script src="js/shared/angular.min.js"></script>
+						  	<script src="js/shared/jquery-1.11.3.min.js"></script>
+						 	<script src="js/shared/bootstrap.min.js"></script>
+						  	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+						  	<script src="js/mainModule.js"></script>
+						  	<script src="js/controllers/dupaCtrl.js"></script>
+						</div>
+						<%}	
 						}%>
-						</p> 
-						<p>Termin wizyty</p>
-						<div class="form-group">
-					    <div class="col-sm-6">
-					      <input ng-model="departureDate" type="text"
-					             datepicker-popup="yyyy-MM-dd" datepickerOptions="dateOptions"
-					             is-open="false" ng-click="data.isOpen = true"
-					             class="validate form-control" READONLY required>
-					    </div>
-					  </div>
-					
-					  <script src="js/shared/angular.min.js"></script>
-					  <script src="js/shared/jquery-1.11.3.min.js"></script>
-					  <script src="js/shared/bootstrap.min.js"></script>
-					  <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
-					  <script src="js/mainModule.js"></script>
-					  <script src="js/controllers/dupaCtrl.js"></script></form>
-					<%}	
-				}
-				//else if(Integer.valueOf(request.getParameter))
-				%>
-				</div>
 			</div>
 		</div>
 	</body>

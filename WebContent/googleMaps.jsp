@@ -46,7 +46,7 @@
 %>
 
 </head>
-<body>
+<body onload="load()">
 <div class="container">
 			<div class="header">
 				<div class="logo">SAISP.pl</div>
@@ -85,61 +85,72 @@
 				</ol>
 			</div>
 			<div class="content">
-				<div class="map"><div id="map" style="height:350px; width:550px"></div>
-				
-			 
-			</div>
+			<div id="map" style="height:600px; width:800px"></div>
 		</div>
 	
-    <script>
+<script>
 
-function initMap() {
+function load() {
+    var map = new google.maps.Map(document.getElementById("map"), {
+      center: new google.maps.LatLng(47.6145, -122.3418),
+      zoom: 13,
+      mapTypeId: 'roadmap'
+    });
+    var infoWindow = new google.maps.InfoWindow;
 
-	var cracowLoc = {lat: 50.0647, lng: 19.945};
-  	var map = new google.maps.Map(document.getElementById('map'), {
-    	center: cracowLoc,
-    	zoom: 10
-  });
-  	var infoWindow = new google.maps.InfoWindow({map: map});
+    // Change this depending on the name of your PHP file
+    downloadUrl("phpgenxml.php", function(data) {
+      var xml = data.responseXML;
+      var markers = xml.documentElement.getElementsByTagName("marker");
+      for (var i = 0; i < markers.length; i++) {
+        var name = markers[i].getAttribute("name");
+        var address = markers[i].getAttribute("address");
+        var point = new google.maps.LatLng(
+            parseFloat(markers[i].getAttribute("lat")),
+            parseFloat(markers[i].getAttribute("lng")));
+        var html = "<b>" + name + "</b> <br/>" + address;
+        var icon = customIcons[type] || {};
+        var marker = new google.maps.Marker({
+          map: map,
+          position: point,
+          icon: icon.icon
+        });
+        bindInfoWindow(marker, map, infoWindow, html);
+      }
+    });
+  }
 
-  //lokalizuj
-  	if (navigator.geolocation) {
-    	navigator.geolocation.getCurrentPosition(function(position) {
-      	var pos = {
-        	lat: position.coords.latitude,
-        	lng: position.coords.longitude
-      	};
+  function bindInfoWindow(marker, map, infoWindow, html) {
+    google.maps.event.addListener(marker, 'click', function() {
+      infoWindow.setContent(html);
+      infoWindow.open(map, marker);
+    });
+  }
 
-      	infoWindow.setPosition(pos);
-      	infoWindow.setContent('Location found.');
-      	map.setCenter(pos);
-    	}, function() {
-      	handleLocationError(true, infoWindow, map.getCenter());
-    	});
-  	} else {
-    	// brak wsparcia dla geolokalizacji
-    	handleLocationError(false, infoWindow, map.getCenter());
-  	}
-//function createMarker(place) {
-//	  var placeLoc = place.geometry.location;
-	  var marker = new google.maps.Marker({
-	    map: map,
-	    position: cracowLoc
-	  });  
-  
-}
+  function downloadUrl(url, callback) {
+    var request = window.ActiveXObject ?
+        new ActiveXObject('Microsoft.XMLHTTP') :
+        new XMLHttpRequest;
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  	infoWindow.setPosition(pos);
-  	infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
-}
+    request.onreadystatechange = function() {
+      if (request.readyState == 4) {
+        request.onreadystatechange = doNothing;
+        callback(request, request.status);
+      }
+    };
+
+    request.open('GET', url, true);
+    request.send(null);
+  }
+
+  function doNothing() {}
 
 
+</script>
 
-    </script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqpCUtiwkYDvy7y6ldMzzvJFwZn_S0Sys&signed_in=true&language=pl&callback=initMap" async defer>
     </script>	
+    </div>
 </body>
 </html>

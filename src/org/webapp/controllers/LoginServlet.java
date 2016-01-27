@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet
 			case 0:
 			{
 				bean = new LoginBean(request.getParameter("userId"), request.getParameter("password"), request.getParameter("typeOfUser"));
-				waliduj = bean.walidacja();
+				waliduj = bean.walidacja(bean.getLogin(),bean.getHaslo());
 				czyIstnieje = bean.czyIstnieje();
 				if(waliduj)
 				{

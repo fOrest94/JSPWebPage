@@ -87,7 +87,13 @@
 				
 				<div class="user_profil_left_side">
 					<div class="up">
-						Tu bedzie zdjecie
+					
+						<form action="getFota" method="post" encType="multipart/form-data">
+						<input type="file" name="file"  value="select images..."/>
+						<input type="hidden" value=<%= request.getParameter("login") %> name="nazwaFoty">
+						<input type="submit" value="Zapisz"/>
+						</form>
+					
 					</div>
 					<div class="down">
 							<form action="userProfile" method="post">

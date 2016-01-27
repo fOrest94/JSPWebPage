@@ -81,7 +81,7 @@ public class LoginBean
 		return false;
 	}
 	
-	public boolean walidacja()
+	public boolean walidacja(String login, String haslo)
 	{
 		if((login.length() < 6) || (haslo.length() < 6))
 		{

@@ -1,7 +1,8 @@
 @CHARSET "UTF-8";
 body 
 {
-  background-color:#dbe9f2;
+  background: url('D:/Apki Java 5 semestr/WebApplication/WebContent/css/original.jpg') top  no-repeat; background-attachment:fixed;
+  background-size: 100% 100%;
   -webkit-font-smoothing: antialiased;
   font: normal 14px Roboto,arial,sans-serif;
   height: 800px;
