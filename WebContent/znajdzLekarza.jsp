@@ -229,10 +229,13 @@
 						%>
 						<div class="wizytaForm">
 						<form action="sendWizyta" method="post">
+							<input type="hidden" value="4" name="mode"/>
+							<input type="hidden" value="<%= (String)request.getAttribute("PESEL")%>" name="PESEL" />
+							<input type="hidden" value="<%= (String)request.getAttribute("id_specjalisty")%>" name="id_specjalisty" />
 							<p>Specjalista : <% out.println(request.getParameter("imie")+" "+request.getParameter("nazwisko")); %></p>
 							<p>PESEL : <% out.println((String)request.getAttribute("PESEL"));%></p>
 								
-								<p>Typ wizyty : <select name="typWizyty" onchange="submit();">
+								<p>Typ wizyty : <select name="typWizyty" >
 									<option disabled selected value="wybierz">wybierz</option>
 		  							<option value="prywatna">Prywatna</option>
 		 							<option value="publiczna">Narodowy Fundusz Zdrowia</option>
@@ -245,16 +248,20 @@
 							for(int i = 0 ;i < rekordy.size();i++)
 							{
 								out.println(rekordy.get(i));
+								%><input type="hidden" value="<%= rekordy.get(i) %>" name="miejsceWizyty" /><%
 							}%>
 							</p> 
 							<p>Termin wizyty:
-						      		<input ng-model="departureDate" type="text"
+						      		<input ng-model="departureDate" type="text" name = "dataWizyty"
 						             datepicker-popup="yyyy-MM-dd" datepickerOptions="dateOptions"
 						             is-open="false" ng-click="data.isOpen = true"
 						             class="validate form-control" READONLY required placeholder="wybierz">
 							</p>
-							<input type="submit" class="wizyta" value="Umow Wizyte"/>	
-					  	</form>
+							<p>Dolegliwosci:<br> 
+							<textarea name="textarea" style="width:350px; height:100px; margin-top: 10px;"></textarea></p>
+							<input type="submit" class="wizyta" value="Umow Wizyte"/>
+								
+					  		</form>
 							<script src="js/shared/angular.min.js"></script>
 						  	<script src="js/shared/jquery-1.11.3.min.js"></script>
 						 	<script src="js/shared/bootstrap.min.js"></script>

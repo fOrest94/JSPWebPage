@@ -15,7 +15,7 @@ import org.webapp.database.Database;
 import org.webapp.models.ShowSpecBean;
 
 
-@WebServlet(urlPatterns ={"/znajdzLekarza", "/showSpecialist", "/setWizyta"})
+@WebServlet(urlPatterns ={"/znajdzLekarza", "/showSpecialist", "/setWizyta", "/sendWizyta"})
 
 public class ShowSpecServlet extends HttpServlet 
 {
@@ -119,7 +119,10 @@ public class ShowSpecServlet extends HttpServlet
 			case 4:
 			{
 				bean = new ShowSpecBean();
-				if(bean.zapiszDoBazy("",9,"","","",""))
+				
+				
+				if(bean.zapiszDoBazy(request.getParameter("PESEL"),Integer.parseInt(request.getParameter("id_specjalisty")),request.getParameter("typWizyty")
+						,request.getParameter("miejsceWizyty"),request.getParameter("dataWizyty"),request.getParameter("textarea")))
 				{
 					request.getRequestDispatcher("znajdzLekarza.jsp").forward(request, response);	
 				}
