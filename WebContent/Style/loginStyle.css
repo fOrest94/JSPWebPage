@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 body 
 {
-  background: url('D:/Apki Java 5 semestr/WebApplication/WebContent/css/original.jpg') top  no-repeat; background-attachment:fixed;
+  background: url('D:/Apki Java 5 semestr/WebApplication/WebContent/webImages/original.jpg') top  no-repeat; background-attachment:fixed;
   background-size: 100% 100%;
   -webkit-font-smoothing: antialiased;
   font: normal 14px Roboto,arial,sans-serif;
@@ -14,6 +14,7 @@ body
     margin-left: auto;
     margin-right: auto;
     margin-top: 300px;
+    padding: 10px 10px 10px 30px ;
 }
 .select-place
 {

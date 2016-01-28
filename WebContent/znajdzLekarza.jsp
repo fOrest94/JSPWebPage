@@ -134,9 +134,11 @@
 							ArrayList<String> rekordy = new ArrayList<String>(40);
 							rekordy = (ArrayList<String>) request.getAttribute("rekordy");
 							int licznik = 0;
+							int licznik2 = 0;
 		
 							for(int i=0;i<rekordy.size();i++)
 							{
+								
 								if(i < 5 && licznik == 4)
 								{
 									%><br><% 

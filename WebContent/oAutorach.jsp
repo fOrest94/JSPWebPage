@@ -97,14 +97,17 @@
 					KRS: 000045654</br>
 				</div>
 				<div class="contactSideRight">
-					<form action="" method="post">
-    					<select name="specjalizacja">
+					<h2>Kontakt</h2>
+					<form action="whatIsYourQuestion" method="post">
+						<div class="error">${odpowiedz}</div>
+    					<select name="specjalizacja" style="width:350px; margin-top: 10px; border-radius: 3px; border-style: solid; height:2.0em; font size=13 ">
         					<option disabled selected value="wybierz">wybierz</option>
   							<option value="specjalista">Specjalista</option>
- 							<div class="pasteOpis"><option value="pacjent">Pacjent</option></div>
+ 							<option value="pacjent">Pacjent</option>
 						</select>
-    					<input type="text" name="email" placeholder="email"/>
-    					<div class="spec_describe"><input type="text" name="tresc" placeholder="tresc"/></div>
+    					<input type="text" name="email" style="width:350px; margin-top: 10px; border-radius: 3px; border-style: solid; height:2.0em;"  placeholder="email"/>
+						<textarea name="textArea" style="width:350px; height:200px; margin-top: 10px; border-style: solid; border-radius: 3px;" name="tresc" font size="13" placeholder="tresc"></textarea></p>
+    					<input type="submit" class="wizyta" value="Wyslij"/>
 					</form>
 				</div>
 			</div>

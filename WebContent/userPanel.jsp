@@ -182,11 +182,10 @@
 						else if(Integer.valueOf(request.getParameter("mode")) == 1)
 						{
 							ArrayList<String> rekordy = new ArrayList<String>();
-							System.out.println("witamy na salonach");
+							%><h2>Lista wizyt</h2><%
 							if(request.getAttribute("setWizyty") != null)
 							{
-								System.out.println("witamy na salonach");
-							ArrayList<String> listaWizyt = new ArrayList<String>(40);
+								ArrayList<String> listaWizyt = new ArrayList<String>(40);
 								listaWizyt = (ArrayList<String>) request.getAttribute("setWizyty");
 								int licznik = 0;
 					
@@ -224,7 +223,7 @@
 							<input type="hidden" value="0" name="mode">
 							<input type="hidden" value="zmienLogin" name="changeSet">
             				<div class="textplace">Podaj nowy login:</div>
-            				<input type="password" name="newLogin"/>
+            				<input type="password" name="newLogin"/></br></br>
 							<input type="submit" class="ver_menu" value="Zmien login"/>
 							</form>
 							<form action="userProfile" method="post">
@@ -235,14 +234,14 @@
             				<div class="textplace">Podaj nowe haslo:</div>
             				<input type="password" name="newPass0"/>
             				<div class="textplace">Powtorz nowe haslo:</div>
-            				<input type="password" name="newPass1"/>
+            				<input type="password" name="newPass1"/></br></br>
 							<input type="submit" class="ver_menu" value="Zmien haslo"/>
 							</form>
 							<form action="userProfile" method="post">
 							<input type="hidden" value="0" name="mode">
 							<input type="hidden" value="zmienEmail" name="changeSet">
 							<div class="textplace">Podaj nowy adres email:</div>
-            				<input type="text" name="newEmail"/>
+            				<input type="text" name="newEmail"/></br></br>
 							<input type="submit" class="ver_menu" value="Zmien email"/>
 							</form>
 							<% 
