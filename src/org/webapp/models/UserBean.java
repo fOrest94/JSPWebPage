@@ -273,7 +273,6 @@ public class UserBean
 	public boolean zmienEmail(String oldEmail, String newEmail, String typeOfUser)
 	{	
 		Database baza = new Database();
-		System.out.println("zmieniam email");
 		String sql = new String();
 		
 			if(typeOfUser.equals("Pacjent"))

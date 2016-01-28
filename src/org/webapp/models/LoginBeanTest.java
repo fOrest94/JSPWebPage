@@ -14,5 +14,14 @@ public class LoginBeanTest
 		
 		assertEquals("Metoda Walidacja() pozwala na wpisywanie zbyt krotkich danych loginu i hasla", bean.walidacja(bean.getLogin(),bean.getHaslo()), false );
 	}
+	
+	@Test
+	public void testgetCookie() 
+	{
+		LoginBean bean = new LoginBean("moghom", "dBioQ139","");
+		
+		assertEquals("Metoda sprawdzania hasla w bazie nie dziala prawidlowo", bean.czyIstnieje(bean.getType()), false );
+	}
 
+	
 }

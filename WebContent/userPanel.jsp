@@ -88,10 +88,10 @@
 				<div class="user_profil_left_side">
 					<div class="up">
 					
-						<form action="getFota" method="post" encType="multipart/form-data">
-						<input type="file" name="file"  value="select images..."/>
-						<input type="hidden" value=<%= request.getParameter("login") %> name="nazwaFoty">
-						<input type="submit" value="Zapisz"/>
+						<form action="FileUploadServlet" method="post" enctype="multipart/form-data">
+						Select File to Upload:<input type="file" name="fileName">
+						<br>
+						<input type="submit" value="Upload">
 						</form>
 					
 					</div>

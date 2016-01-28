@@ -47,7 +47,7 @@ public class LoginBean
 		this.type = type;
 	}
 
-	public boolean czyIstnieje()
+	public boolean czyIstnieje(String type)
 	{
 		Database bazaSQL = new Database();
 		if(login.equals("admin") && haslo.equals("admin"))

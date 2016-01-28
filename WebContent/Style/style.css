@@ -183,6 +183,20 @@ ol > li:hover
 	padding: 20px 30px 20px 30px;
 	
 }
+.content .mainLeft
+{
+	
+	width: 430px;
+	float: left;
+	padding: 20px 10px 40px 10px;
+	
+}
+.content .mainRight
+{
+	float: left;
+	width: 430px;
+	padding: 20px 10px 40px 10px;
+}
 .content p
 {
 	margin: 0px 40px 0px 40px;

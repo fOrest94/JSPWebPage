@@ -154,7 +154,6 @@ public class ShowSpecBean
 		Database baza = new Database();
 		boolean sprawdz;
 		String sql = "insert into wizyty (PESEL,id_specjalisty,typ_wizyty,miejsce_wizyty,termin_wizyty,dolegliwosci) values ('"+PESEL+"',"+id_specjalisty+",'"+typ_wizyty+"','"+miejsce_wizyty+"','"+termin_wizyty+"','"+dolegliwosci+"');";
-		System.out.println(sql);
 		sprawdz = baza.dodajDoBazy(baza.statement, sql);
 		if(sprawdz)
 		{

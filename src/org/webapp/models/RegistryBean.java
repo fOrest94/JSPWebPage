@@ -49,7 +49,6 @@ public class RegistryBean
 	
 	public boolean walidacja(String login, String haslo)
 	{
-		System.out.println("Walidacja sie sypie");
 		if((login.length() < 6) || (haslo.length() < 6))
 		{
 			return false;

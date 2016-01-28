@@ -8,6 +8,11 @@ public class ContactBean
 	private String email;
 	private String opis;
 	
+	public ContactBean() 
+	{
+		
+	}
+	
 	public ContactBean(String type, String email, String opis) 
 	{
 		this.type = type;
