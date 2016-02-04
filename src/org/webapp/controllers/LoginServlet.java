@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet
 	{
 			
 		mode = Integer.valueOf(request.getParameter("mode"));
-		System.out.println("mam mode:"+mode);
+		
 		switch(mode)
 		{
 			case 0:
@@ -61,6 +61,7 @@ public class LoginServlet extends HttpServlet
 			}
 			case 1:
 			{
+				bean = new LoginBean();
 				response.addCookie(bean.getCookie("userBean", ""));
 				response.addCookie(bean.getCookie("type", ""));
 				response.sendRedirect("index.jsp");

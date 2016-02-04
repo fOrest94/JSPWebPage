@@ -14,7 +14,7 @@
             <h4>Wpisz dane logowania</h4>
   			<form action="login" method="post">
   				<select name="typeOfUser" id="typeOfUser"">
-			        <option selected value="pacjent">Wybierz:</option>
+			        <option selected value="admin">Wybierz:</option>
 			        <option value="Pacjent">Pacjent</option>
 			        <option value="Specjalista">Specjalista</option>
 	    		</select>

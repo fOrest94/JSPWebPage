@@ -1,7 +1,6 @@
 package org.webapp.models;
 
 import java.util.ArrayList;
-
 import org.webapp.database.Database;
 
 public class UserBean 
@@ -17,6 +16,7 @@ public class UserBean
 	private String miasto;
 	private String type;
 	private String id_specjalisty;
+	private Database baza;
 			
 	public String getId_specjalisty() 
 	{
@@ -139,10 +139,10 @@ public class UserBean
 	
 	public ArrayList<String> pokazProfil(String login, String typeOfUser)
 	{
-		Database baza = new Database();
+		baza = new Database();
 		String sql = new String();
 		ArrayList<String> listaDanych = new ArrayList<String>();
-		if(typeOfUser.equals("Pacjent"))
+		if(typeOfUser.equals("Pacjent") || typeOfUser.equals("admin"))
 		{
 			sql = " select * from pacjenci where login = '"+login+"';";
 			listaDanych = baza.pokazProfil(baza.executeQuery(baza.statement, sql), typeOfUser);
@@ -203,7 +203,7 @@ public class UserBean
 	
 	public String zmienHaslo(String oldPass, String newPass0, String newPass1, String typeOfUser)
 	{
-		Database baza = new Database();
+		baza = new Database();
 		String sql = new String();
 		String sprawdz = new String();
 		
@@ -249,7 +249,7 @@ public class UserBean
 	
 	public boolean zmienLogin(String oldLogin, String newLogin, String typeOfUser)
 	{	
-		Database baza = new Database();
+		baza = new Database();
 		String sql = new String();
 		
 			if(typeOfUser.equals("Pacjent"))
@@ -272,7 +272,7 @@ public class UserBean
 	
 	public boolean zmienEmail(String oldEmail, String newEmail, String typeOfUser)
 	{	
-		Database baza = new Database();
+		baza = new Database();
 		String sql = new String();
 		
 			if(typeOfUser.equals("Pacjent"))
@@ -295,7 +295,6 @@ public class UserBean
 	{
 		Database baza = new Database();
 		String sql = new String();
-		System.out.println("id ziomala*"+getPESEL()+"*"+getId_specjalisty()+"***");
 			if(getType().equals("Pacjent"))
 			{
 				sql = "SELECT * FROM `wizyty` where wizyty.PESEL = '"+getPESEL()+"'";
@@ -306,5 +305,39 @@ public class UserBean
 			}
 			
 			return baza.pokazProfil(baza.executeQuery(baza.statement, sql), getType()+"W");
+	}
+	
+	public ArrayList<String> pobierzWszystkieWizyty()
+	{
+		Database baza = new Database();
+		String sql = "SELECT * FROM `wizyty`";
+			
+		return baza.showListOfWisits(baza.executeQuery(baza.statement, sql));
+	}
+	
+	public boolean usunWizyte(String id_wizyty)
+	{
+		baza = new Database();
+		String sql = "DELETE FROM wizyty WHERE id_wizyty ="+id_wizyty+";";
+		System.out.println(sql);
+		if(baza.updateUserData(baza.statement, sql))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public ArrayList<String> wypiszPacjentow()
+	{
+		baza = new Database();
+		String sql = "select * from pacjenci";
+		return baza.showListOfPacjent(baza.executeQuery(baza.statement, sql));
+	}
+	
+	public ArrayList<String> wypiszSpec()
+	{
+		baza = new Database();
+		String sql = "select * from lekarze";
+		return baza.showListOfSpec(baza.executeQuery(baza.statement, sql));
 	}
 }

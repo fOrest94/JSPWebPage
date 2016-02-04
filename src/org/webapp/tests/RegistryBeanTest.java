@@ -1,8 +1,10 @@
-package org.webapp.models;
+package org.webapp.tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.webapp.models.RegistryBean;
+import org.webapp.models.UserBean;
 
 public class RegistryBeanTest {
 

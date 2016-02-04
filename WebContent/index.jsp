@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@page import="javax.servlet.http.Cookie"%>
 <%@page import="java.io.IOException"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,11 +89,14 @@
 			</div>
 			<div class="content">
 			<h3>Witamy na stronie Systemu Asygnacji i segregacji pacjentow</h3>
-			<div class="mainLeft"><img src="D:/Apki Java 5 semestr/WebApplication/WebContent/webImages/L.jpg" >
-			<div class="p">                                      <br>Szukasz najlepszej opieki medycznej? <br>Tutaj ja znajdziesz! Nasz serwis <br>zajmuje sie zrzeszaniem specjalistow <br>i placowek medycznych z calej Polski. <br>Bez kolejek, Bezpiecznie,Bezplatnie</div>
+			<div class="mainLeft"><img src="D:/Apki Java 5 semestr/WebApplication/WebContent/Style/L.jpg" />
+			<div class="p">                                      <br>Szukasz najlepszej opieki medycznej? <br>
+			Tutaj ja znajdziesz! Nasz serwis <br>zajmuje sie zrzeszaniem specjalistow <br>
+			i placowek medycznych z calej Polski. <br>Bez kolejek, Bezpiecznie,Bezplatnie</div>
 			</div>
-			<div class="mainRight"><img src="D:/Apki Java 5 semestr/WebApplication/WebContent/webImages/R.jpg" >
-			<div class="p">                                      <br>Grupa LUX MED to najwieksza w Polsce siec prywatnych centrow medycznych. Pod markami LUX MED i Medycyna Rodzinna prowadzimy 87 placowek. Wspolpracujemy rowniez z placowkami partnerskimi na terenie calego kraju.</div>
+			<div class="mainRight"><img src="D:/Apki Java 5 semestr/WebApplication/WebContent/Style/R.jpg" >
+			<div class="p">                                      <br>Grupa LUX MED to najwieksza w Polsce siec prywatnych centrow medycznych.
+			 Pod markami LUX MED i Medycyna Rodzinna prowadzimy 87 placowek. Wspolpracujemy rowniez z placowkami partnerskimi na terenie calego kraju.</div>
 			</div>
 			   
 			</div>

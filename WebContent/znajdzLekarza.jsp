@@ -41,7 +41,6 @@
 	        	}
 	        	System.out.println(cookie[i].getValue()+"*"+cookie[i].getName()+"**");
 	    	}
-	    	System.out.println(sesja+" *** ewr3rewrwe");
 	    	if(sesja == 2)
 	    	{
 	    		return true;

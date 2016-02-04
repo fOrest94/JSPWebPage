@@ -8,8 +8,12 @@ public class LoginBean
 {
 	private String login;
 	private String haslo;
-	private String type;
+	private String type ="admin";
 
+	public LoginBean() 
+	{
+
+	}
 	public LoginBean(String login, String haslo, String type) 
 	{
 		this.login = login;
@@ -54,7 +58,7 @@ public class LoginBean
 		{
 			return true;
 		}
-		else if(type.equals("Pacjent"))
+		else if(type.equals("Pacjent") || type.equals("admin"))
 		{
 			String SQL = "SELECT * FROM pacjenci WHERE login = '"+login+"' and haslo = '"+haslo+"';";
 			boolean loginExist = bazaSQL.findUserInfo(bazaSQL.executeQuery(bazaSQL.statement, SQL), login, haslo);
@@ -97,7 +101,7 @@ public class LoginBean
 		if(var.equals(""))	
 			cookie.setMaxAge(0); 
 		else
-			cookie.setMaxAge(300);
+			cookie.setMaxAge(1200);
 		
 		return cookie;
 	}

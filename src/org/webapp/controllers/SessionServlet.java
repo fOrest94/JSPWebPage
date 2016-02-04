@@ -1,8 +1,6 @@
 package org.webapp.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,26 +9,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.webapp.models.UserBean;
 
-@WebServlet(urlPatterns ={"/SessionServlet", "/userProfile" })
+@WebServlet(urlPatterns ={"/SessionServlet", "/userProfile", "/edytujWizyte", "/typUsera"})
 public class SessionServlet extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
     private UserBean userBean;  
     private int mode;
-    private boolean sprawdz;
     private String infoMess;
     
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		mode = Integer.valueOf(request.getParameter("mode"));
+		System.out.println("Login to "+request.getParameter("login")+" a typ to "+request.getParameter("typeOfUser"));
 		if(request.getParameter("login") != null && request.getParameter("typeOfUser") != null)
 		{
-		userBean = new UserBean((request.getParameter("login")), request.getParameter("typeOfUser"));
-		request.setAttribute("rekordy", userBean.pokazProfil(userBean.getLogin(),userBean.getType()));
+			userBean = new UserBean((request.getParameter("login")), request.getParameter("typeOfUser"));
+			request.setAttribute("rekordy", userBean.pokazProfil(userBean.getLogin(),userBean.getType()));
 		}
-		System.out.println("UserBean [imie=" + userBean.getImie() + ", nazwisko=" + userBean.getNazwisko() + ", email=" + userBean.getEmail() + ", PESEL=" + userBean.getPESEL()
-				+ ", login=" + userBean.getLogin() + ", haslo=" + userBean.getHaslo() + ", telefon=" + userBean.getTelefon() + ", specjalizacja=" + userBean.getSpecjalizacja()
-				+ ", miasto=" + userBean.getMiasto() + ", type=" + userBean.getType() + "]");
+		
 		switch(mode)
 		{
 		 	case 0:
@@ -39,14 +36,9 @@ public class SessionServlet extends HttpServlet
 		 		{
 			 		if(request.getParameter("changeSet").equals("zmienLogin"))
 			 		{
-			 			System.out.println("Zmieniam login");
 			 			if(userBean.walidacja(request.getParameter("newLogin")))
 			 			{
-			 				if(userBean.zmienLogin(userBean.getLogin(), request.getParameter("newLogin"),userBean.getType()))
-				 			{
-				 				
-				 			}
-			 				else
+			 				if(!userBean.zmienLogin(userBean.getLogin(), request.getParameter("newLogin"),userBean.getType()))
 			 				{
 			 					request.setAttribute("rekordy", "Wystapil blad");
 								request.getRequestDispatcher("/userPanel.jsp").forward(request, response);
@@ -57,7 +49,6 @@ public class SessionServlet extends HttpServlet
 			 				request.setAttribute("rekordy", "Login jest za krotki");
 							request.getRequestDispatcher("/userPanel.jsp").forward(request, response);
 			 			}
-			 			
 			 		}
 			 		else if(request.getParameter("changeSet").equals("zmienHaslo"))
 			 		{
@@ -78,18 +69,64 @@ public class SessionServlet extends HttpServlet
 		 	case 1:
 			{
 				request.setAttribute("mode", mode);
-				request.setAttribute("setWizyty",userBean.pobierzWizyty());
+				System.out.println("Uzytkownik : "+userBean.getType());
+				request.setAttribute("typeOfUser", userBean.getType());
+				if(!userBean.getType().equals("admin"))
+				{
+					System.out.println("kupa");
+					request.setAttribute("setWizyty",userBean.pobierzWizyty());
+				}
+				else if(userBean.getType().equals("admin"))
+				{
+					System.out.println("kupa mega");
+					request.setAttribute("setWizyty",userBean.pobierzWszystkieWizyty());
+				}
 				request.getRequestDispatcher("/userPanel.jsp").forward(request, response);
 				break;
 		 	}
 		 	case 2:
 		 	{
-		 		System.out.println("Jestem w 2!");
 				request.setAttribute("label", userBean.getType());
 				request.setAttribute("mode", mode);
 				request.getRequestDispatcher("/userPanel.jsp").forward(request, response);
 			    break;
-		 	}	
+		 	}
+		 	case 3:
+		 	{
+		 		request.setAttribute("mode", 1);
+		 	/*//userBean.usunWizyte(request.get);
+		 		ArrayList<String> lista = new ArrayList<String>(40);
+		 		lista = (ArrayList<String>)request.getAttribute("id_wizyty");
+		 		System.out.println("lista wymiar :"+lista.size());
+		 		for(int i=0;i<lista.size();i++)
+		 			System.out.println(lista.get(i));
+		 		request.setAttribute("setWizyty",userBean.pobierzWizyty());
+				request.getRequestDispatcher("/userPanel.jsp").forward(request, response);*/
+		 		break;
+		 	}
+		 	case 4:
+		 	{
+		 		System.out.println("typ sercz to : "+request.getParameter("typSearch"));
+		 		if(request.getParameter("typSearch") != null)
+		 		{
+		 			if(request.getParameter("typSearch").equals("Pacjent"))
+			 		{
+			 			System.out.println("wszedlem do listy");
+			 			request.setAttribute("listOfUsers",userBean.wypiszPacjentow());
+			 			request.setAttribute("mode",mode);
+			 			request.setAttribute("typeOfUser",userBean.getType());
+			 		}
+			 		else if(request.getParameter("typSearch").equals("Specjalista"))
+			 		{
+			 			System.out.println("wszedlem do listy");
+			 			request.setAttribute("listOfUsers",userBean.wypiszSpec());
+			 			request.setAttribute("mode",mode);
+			 			request.setAttribute("typeOfUser",userBean.getType());
+			 		}
+		 		}
+				request.getRequestDispatcher("/userPanel.jsp").forward(request, response);
+		 		break;
+		 	}
 		 	
 		 }
 	}

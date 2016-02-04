@@ -1,8 +1,9 @@
-package org.webapp.models;
+package org.webapp.tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.webapp.models.ContactBean;
 
 public class ContactBeanTest extends ContactBean {
 

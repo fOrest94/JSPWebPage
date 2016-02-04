@@ -3,6 +3,7 @@
 <%@page import="javax.servlet.http.Cookie"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.io.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +43,6 @@
 		return false; 
 	}
 %>
-	
 </head>
 	<body>
 		<div class="container">
@@ -75,56 +75,65 @@
 			</div>
 			<div class="menu">
 				<ol>
-
-				<li><a href="index.jsp">Strona glowna</a></li>
-				<li><a href="znajdzLekarza.jsp">Znajdz lekarza</a></li>
-				<li><a href="googleMaps.jsp">Znajdz placowke</a></li>
-				<li><a href="oAutorach.jsp">O Autorach</a></li>
-			
+					<li><a href="index.jsp">Strona glowna</a></li>
+					<li><a href="znajdzLekarza.jsp">Znajdz lekarza</a></li>
+					<li><a href="googleMaps.jsp">Znajdz placowke</a></li>
+					<li><a href="oAutorach.jsp">O Nas</a></li>
 				</ol>
 			</div>
 			<div class="content">
-				
 				<div class="user_profil_left_side">
 					<div class="up">
-					
-						<form action="FileUploadServlet" method="post" enctype="multipart/form-data">
-						Select File to Upload:<input type="file" name="fileName">
-						<br>
-						<input type="submit" value="Upload">
-						</form>
-					
+								<img src="images/${fileName}"/>
+							<form action="formUpload" method="post" enctype="multipart/form-data">
+								<input type="hidden" value="2" name="mode" id="mode">
+								<input type="hidden" value="${login}" name="login">
+								<input type="hidden" value="${typeOfUser}" name="typeOfUser">
+								<input type="file" name="photo" >
+								<input type="submit" class="ver_menu" value="pobierz zdjecie"/>
+							</form>
 					</div>
 					<div class="down">
 							<form action="userProfile" method="post">
-							<input type="hidden" value="2" name="mode" id="mode">
-							<input type="hidden" value=<%= request.getParameter("login") %> name="login">
-							<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
-							<input type="submit" class="ver_menu" value="Profil"/>
+								<input type="hidden" value="2" name="mode" id="mode">
+								<input type="hidden" value=<%= request.getParameter("login") %> name="login">
+								<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
+								<input type="submit" class="ver_menu" value="Profil"/>
 							</form>
 							<form action="userProfile" method="post">
-							<input type="hidden" value="1" name="mode" id="mode">
-							<input type="hidden" value=<%= request.getParameter("login") %> name="login">
-							<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
-							<input type="submit" class="ver_menu" value="Wizyty"/>
+								<input type="hidden" value="1" name="mode" id="mode">
+								<input type="hidden" value=<%= request.getParameter("login") %> name="login">
+								<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
+								<input type="submit" class="ver_menu" value="Lista wizyt"/>
 							</form>
+							<%
+							if(request.getParameter("typeOfUser").equals("admin"))
+							{%>
+								<form action="userProfile" method="post">
+								<input type="hidden" value="4" name="mode">
+								<input type="hidden" value=<%= request.getParameter("login") %> name="login">
+								<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
+								<input type="submit" class="ver_menu" value="Lista uzytkownikow"/>
+								</form>
+							<%}
+							%>
 							<form action="userProfile" method="post">
-							<input type="hidden" value="0" name="mode" id="mode">
-							<input type="hidden" value=<%= request.getParameter("login") %> name="login">
-							<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
-							<input type="submit" class="ver_menu" value="Ustawienia"/>
+								<input type="hidden" value="0" name="mode" id="mode">
+								<input type="hidden" value=<%= request.getParameter("login") %> name="login">
+								<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
+								<input type="submit" class="ver_menu" value="Ustawienia"/>
 							</form>
 					</div>
 				</div>
 				<div class="user_profil_right_side">
 					<div class="profile_content">
-					<%
+					<%	
 						
 						if(Integer.valueOf(request.getParameter("mode")) == 2)
 						{
 							ArrayList<String> rekordy = new ArrayList<String>();
 						
-							if(request.getAttribute("label").equals("Pacjent") && request.getAttribute("label")!=null)
+							if((request.getAttribute("label").equals("Pacjent") || request.getAttribute("label").equals("admin")) && request.getAttribute("label")!=null)
 							{	
 								if(request.getAttribute("rekordy") != null)
 								{
@@ -181,36 +190,98 @@
 						}
 						else if(Integer.valueOf(request.getParameter("mode")) == 1)
 						{
-							ArrayList<String> rekordy = new ArrayList<String>();
-							%><h2>Lista wizyt</h2><%
-							if(request.getAttribute("setWizyty") != null)
+							if(!request.getParameter("typeOfUser").equals("admin"))
 							{
-								ArrayList<String> listaWizyt = new ArrayList<String>(40);
-								listaWizyt = (ArrayList<String>) request.getAttribute("setWizyty");
-								int licznik = 0;
-					
-								for(int i=0;i<listaWizyt.size();i++)
+								ArrayList<String> rekordy = new ArrayList<String>();
+								%><h2>Lista wizyt</h2><%
+								if(request.getAttribute("setWizyty") != null)
 								{
-									if(licznik == 6)
+									ArrayList<String> listaWizyt = new ArrayList<String>();
+									ArrayList<String> nowa = new ArrayList<String>();
+									listaWizyt = (ArrayList<String>) request.getAttribute("setWizyty");
+									int licznik = 0;
+						
+									for(int i=0;i<listaWizyt.size();i++)
 									{
-										%><br><%
-										licznik = 0;
-										
-									}
-									else if(licznik == 0)
-									{
+										if(licznik == 7)
+										{
+											%><br><%
+											licznik = 0;
+											
+										}
+										if(licznik == 0)
+										{
+											%>
+											<form action="edytujWizyte" method="post">
+											<input type="hidden" value="3" name="mode">
+											<div class="viewWizyta_ID"><input type="checkbox" name="id_wizyty" value="<%=listaWizyt.get(i)%>"></div>
+											<%
+											licznik++;
+											continue;
+										}
+										else if(licznik == 1)
+										{
+											licznik++;
+											continue;
+										}
+										else if(licznik == 2)
+										{
+											%><div class="viewWizyta"><%out.println(listaWizyt.get((i-1))+" "+listaWizyt.get(i)); %></div><%
+										}
+										else
+										{
+											%><div class="viewWizyta"><%out.println(listaWizyt.get(i)); %></div><%
+										}
 										licznik++;
-										continue;
 									}
-									else if(licznik == 1)
+									%><input type="submit" class="viewWizyta_button" value="Usun"/>
+									</form><%
+								}
+							}
+							else if(request.getParameter("typeOfUser").equals("admin"))
+							{
+								ArrayList<String> rekordy = new ArrayList<String>();
+								%><h2>Lista wizyt</h2><%
+								if(request.getAttribute("setWizyty") != null)
+								{
+									ArrayList<String> listaWizyt = new ArrayList<String>();
+									listaWizyt = (ArrayList<String>) request.getAttribute("setWizyty");
+									int licznik = 0;
+						
+									for(int i=0;i<listaWizyt.size();i++)
 									{
-										%><div class="viewWizyta"><%out.println(listaWizyt.get((i-1))+" "+listaWizyt.get(i)); %></div><%
+										if(licznik == 7)
+										{
+											%><br><%
+											licznik = 0;
+											
+										}
+										if(licznik == 0 && i<7)
+										{
+											%>
+											<div class="viewWizyta_ID_empty"></div>
+											<%
+											licznik++;
+											continue;
+										}
+										else if(licznik == 0 && i>6)
+										{
+											%>
+											<form action="edytujWizyte" method="post">
+											<input type="hidden" value="3" name="mode">
+											<div class="viewWizyta_ID"><input type="checkbox" name="id_wizyty" value="<%=listaWizyt.get(i)%>"></div>
+											<%
+											licznik++;
+											continue;
+										}
+										else
+										{
+											%><div class="viewWizytaA"><%out.println(listaWizyt.get(i)); %></div><%
+										}
+										licznik++;
 									}
-									else
-									{
-										%><div class="viewWizyta"><%out.println(listaWizyt.get(i)); %></div><%
-									}
-									licznik++;
+									%><input type="submit" class="viewWizyta_button" value="Usun"/>
+									</form><%
 								}
 							}
 						}
@@ -219,34 +290,93 @@
 							%><div class="profile_content"><%
 							%>
 							<div class="error">${infoMess}</div>
-							<form action="userProfile" method="post">
-							<input type="hidden" value="0" name="mode">
-							<input type="hidden" value="zmienLogin" name="changeSet">
-            				<div class="textplace">Podaj nowy login:</div>
-            				<input type="password" name="newLogin"/></br></br>
-							<input type="submit" class="ver_menu" value="Zmien login"/>
-							</form>
-							<form action="userProfile" method="post">
-							<input type="hidden" value="0" name="mode">
-							<input type="hidden" value="zmienHaslo" name="changeSet">
-							<div class="textplace">Podaj stare haslo:</div>
-							<input type="password" name="oldPass"/>
-            				<div class="textplace">Podaj nowe haslo:</div>
-            				<input type="password" name="newPass0"/>
-            				<div class="textplace">Powtorz nowe haslo:</div>
-            				<input type="password" name="newPass1"/></br></br>
-							<input type="submit" class="ver_menu" value="Zmien haslo"/>
-							</form>
-							<form action="userProfile" method="post">
-							<input type="hidden" value="0" name="mode">
-							<input type="hidden" value="zmienEmail" name="changeSet">
-							<div class="textplace">Podaj nowy adres email:</div>
-            				<input type="text" name="newEmail"/></br></br>
-							<input type="submit" class="ver_menu" value="Zmien email"/>
-							</form>
+							<div class="part_left">
+								<form action="userProfile" method="post">
+								<input type="hidden" value="0" name="mode">
+								<input type="hidden" value="zmienHaslo" name="changeSet">
+								<div class="textSett">Podaj stare haslo:</div>
+								<input type="password" name="oldPass"/>
+	            				<div class="textSett">Podaj nowe haslo:</div>
+	            				<input type="password" name="newPass0"/>
+	            				<div class="textSett">Powtorz nowe haslo:</div>
+	            				<input type="password" name="newPass1"/><br>
+								<input type="submit" class="bottomSett" value="Zmien haslo"/>
+								</form>
+							</div>
+							<div class="part_right">
+								<form action="userProfile" method="post">
+								<input type="hidden" value="0" name="mode">
+								<input type="hidden" value="zmienLogin" name="changeSet">
+	            				<div class="textSett">Podaj nowy login:</div>
+	            				<input type="password" name="newLogin"/><br>
+								<input type="submit" class="bottomSett" value="Zmien login"/>
+								</form>
+								<form action="userProfile" method="post">
+								<input type="hidden" value="0" name="mode">
+								<input type="hidden" value="zmienEmail" name="changeSet">
+								<div class="textSett">Podaj nowy adres email:</div>
+	            				<input type="text" name="newEmail"/><br>
+								<input type="submit" class="bottomSett" value="Zmien email"/>
+								</form>
+							</div>
 							<% 
 						}
-					%>
+						else if(Integer.valueOf(request.getParameter("mode")) == 4)
+						{%>
+							<form action="typUsera" method="post">
+							<input type="hidden" value="4" name="mode">
+							<input type="hidden" value=<%= request.getParameter("login") %> name="login">
+							<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
+								Pokaz liste: 
+								<select name="typSearch" onchange="submit();">
+										<option selected value="Pacjent">Wybierz:</option>
+										<option value="Pacjent">Pacjent</option>
+								 		<option value="Specjalista">Specjalista</option>
+								</select>
+							</form><br>
+							<%
+							if(request.getAttribute("listOfUsers") != null)
+							{
+									ArrayList<String> rekordy = new ArrayList<String>();
+									rekordy = (ArrayList<String>) request.getAttribute("listOfUsers");
+									int licznik = 0;
+						
+									for(int i=0;i<rekordy.size();i++)
+									{
+										if(licznik == 6)
+										{
+											%><br><%
+											licznik = 0;
+											
+										}
+										if(licznik == 0 && i<5)
+										{
+											%>
+											<div class="viewWizyta_ID_empty"></div>
+											<%
+											licznik++;
+											continue;
+										}
+										if(licznik == 0 && i>5)
+										{
+											%>
+											<form action="edytujWizyte" method="post">
+											<input type="hidden" value="3" name="mode">
+											<div class="viewWizyta_ID"><input type="checkbox" name="id_wizyty" value="<%=rekordy.get(i)%>"></div>
+											<%
+											licznik++;
+											continue;
+										}
+										else
+										{
+											%><div class="viewWizyta"><%out.println(rekordy.get(i)); %></div><%
+										}
+										licznik++;
+									}
+									%><input type="submit" class="viewWizyta_button" value="Usun"/>
+									</form><%
+							}
+						}%>
 					</div>
 				</div>
 			</div>

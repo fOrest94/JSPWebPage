@@ -108,7 +108,6 @@ public class Database
 	
 	public ResultSet executeQuery(Statement state, String zapytanie_sql) 
 	{
-		System.out.print("executeQuery");
 		try 
 		{
 			
@@ -119,6 +118,98 @@ public class Database
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public ArrayList<String> showListOfPacjent(ResultSet result) 
+	{
+		ArrayList<String> arrlist = new ArrayList<String>();
+		try 
+		{
+			arrlist.add("PESEL");
+			arrlist.add("Imie");
+			arrlist.add("Nazwisko");
+			arrlist.add("Email");
+			arrlist.add("Login");
+			arrlist.add("Haslo");
+			
+			while (result.next()) 
+			{
+						arrlist.add(result.getString("PESEL"));
+						arrlist.add(result.getString("imie"));
+						arrlist.add(result.getString("nazwisko"));
+						arrlist.add(result.getString("email"));
+						arrlist.add(result.getString("login"));
+						arrlist.add(result.getString("haslo"));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Blad odczytu z bazy! " + e.toString());
+			System.exit(3);
+		}
+		return arrlist;
+	}
+	
+	public ArrayList<String> showListOfSpec(ResultSet result) 
+	{
+		ArrayList<String> arrlist = new ArrayList<String>();
+		try 
+		{
+			arrlist.add("Id_Specjalisty");
+			arrlist.add("Imie");
+			arrlist.add("Nazwisko");
+			arrlist.add("Email");
+			arrlist.add("Login");
+			arrlist.add("Haslo");
+			
+			while (result.next()) 
+			{
+						arrlist.add(result.getString("id_specjalisty"));
+						arrlist.add(result.getString("imie"));
+						arrlist.add(result.getString("nazwisko"));
+						arrlist.add(result.getString("email"));
+						arrlist.add(result.getString("login"));
+						arrlist.add(result.getString("haslo"));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Blad odczytu z bazy! " + e.toString());
+			System.exit(3);
+		}
+		return arrlist;
+	}
+	
+	public ArrayList<String> showListOfWisits(ResultSet result) 
+	{
+		ArrayList<String> arrlist = new ArrayList<String>();
+		try 
+		{
+			arrlist.add("Id_wizyty");
+			arrlist.add("Pesel Pacjenta");
+			arrlist.add("Id specjalisty");
+			arrlist.add("Typ wizyty");
+			arrlist.add("Miejsce wizyty");
+			arrlist.add("Termin wizyty");
+			arrlist.add("Dolegliwosci");
+			
+			while (result.next()) 
+			{
+						arrlist.add(result.getString("id_wizyty"));
+						arrlist.add(result.getString("PESEL"));
+						arrlist.add(result.getString("id_specjalisty"));
+						arrlist.add(result.getString("typ_wizyty"));
+						arrlist.add(result.getString("miejsce_wizyty"));
+						arrlist.add(result.getString("termin_wizyty"));
+						arrlist.add(result.getString("dolegliwosci"));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("Blad odczytu z bazy! " + e.toString());
+			System.exit(3);
+		}
+		return arrlist;
 	}
 	
 	public ArrayList<String> pokazSpecjalistow(ResultSet result) 
@@ -152,7 +243,7 @@ public class Database
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println("Bl¹d odczytu z bazy! " + e.toString());
+			System.out.println("Blad odczytu z bazy! " + e.toString());
 			System.exit(3);
 		}
 		return arrlist;
@@ -184,15 +275,12 @@ public class Database
 	public ArrayList<String> pokazProfil(ResultSet result, String type) 
 	{
 		ArrayList<String> arrlist = new ArrayList<String>();
-		
-			System.out.println("2.0"+type);
-			System.out.println("*"+type+"*");
-		int licznik = 0;
+
 		try 
 		{
 			while (result.next()) 
 			{
-				if(type.equals("Pacjent"))
+				if(type.equals("Pacjent") || type.equals("admin"))
 				{
 					arrlist.add(result.getString("imie"));
 					arrlist.add(result.getString("nazwisko"));
@@ -243,6 +331,7 @@ public class Database
 					Database baza = new Database();
 					String sql = "SELECT Imie,Nazwisko from lekarze where id_specjalisty = '"+result.getString("id_specjalisty")+"';";
 					arraylistIN = baza.pokazProfil(baza.executeQuery(baza.statement, sql), "getIN");
+					arrlist.add(result.getString("id_wizyty"));
 					arrlist.addAll(arraylistIN);
 					arrlist.add(result.getString("typ_wizyty"));
 					arrlist.add(result.getString("miejsce_wizyty"));
@@ -255,6 +344,7 @@ public class Database
 					Database baza = new Database();
 					String sql = "SELECT imie,nazwisko from pacjenci where PESEL = '"+result.getString("PESEL")+"';";
 					arraylistIN = baza.pokazProfil(baza.executeQuery(baza.statement, sql), "getIN");
+					arrlist.add(result.getString("id_wizyty"));
 					arrlist.addAll(arraylistIN);
 					arrlist.add(result.getString("typ_wizyty"));
 					arrlist.add(result.getString("miejsce_wizyty"));
@@ -266,11 +356,7 @@ public class Database
 					arrlist.add(result.getString("imie"));
 					arrlist.add(result.getString("nazwisko"));	
 				}
-				System.out.println("2.5");
-				licznik++;
 			}
-			for(int i = 0 ; i<arrlist.size();i++)
-				System.out.println(arrlist.get(i));
 		} 
 		catch (SQLException e) 
 		{
