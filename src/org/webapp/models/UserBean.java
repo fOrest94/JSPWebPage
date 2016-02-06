@@ -170,8 +170,7 @@ public class UserBean
 			setId_specjalisty(listaDanych.get(8));
 			return listaDanych;
 		}	
-		return listaDanych;
-		
+		return listaDanych;	
 	}
 	
 	public boolean sprawdzHaslo(String newPass0, String newPass1)
@@ -252,7 +251,7 @@ public class UserBean
 		baza = new Database();
 		String sql = new String();
 		
-			if(typeOfUser.equals("Pacjent"))
+			if(typeOfUser.equals("Pacjent") || typeOfUser.equals("admin"))
 			{
 				sql = "UPDATE pacjenci SET login = '"+newLogin+"' WHERE login = '"+oldLogin+"';";
 			}
@@ -303,6 +302,10 @@ public class UserBean
 			{
 				sql = "SELECT * FROM `wizyty` where wizyty.id_specjalisty = '"+getId_specjalisty()+"'";
 			}
+			else if(getType().equals("admin"))
+			{
+				sql = "SELECT * FROM `wizyty`";
+			}
 			
 			return baza.pokazProfil(baza.executeQuery(baza.statement, sql), getType()+"W");
 	}
@@ -315,10 +318,25 @@ public class UserBean
 		return baza.showListOfWisits(baza.executeQuery(baza.statement, sql));
 	}
 	
-	public boolean usunWizyte(String id_wizyty)
+	public boolean usunZBazy(String id, String whatToDelete)
 	{
+		System.out.println("opa");
 		baza = new Database();
-		String sql = "DELETE FROM wizyty WHERE id_wizyty ="+id_wizyty+";";
+		System.out.println("opa");
+		String sql = new String();
+		System.out.println("Szmato"+whatToDelete);
+		if(whatToDelete.equals("wizyta"))
+		{
+			sql = "DELETE FROM wizyty WHERE id_wizyty = '"+id+"';";
+		}
+		else if(whatToDelete.equals("Pacjent"))
+		{
+			sql = "DELETE from pacjenci WHERE PESEL = '"+id+"';";
+		}
+		else if(whatToDelete.equals("Specjalista"))
+		{
+			sql = "DELETE from lekarze WHERE id_specjalisty = "+id+";";
+		}
 		System.out.println(sql);
 		if(baza.updateUserData(baza.statement, sql))
 		{

@@ -74,9 +74,6 @@ public class ShowSpecServlet extends HttpServlet
 		mode = Integer.valueOf(request.getParameter("mode"));
 		switch(mode)
 		{
-			/**
-			 * sluzy do wyswietlania konkretnego specjalisty z bazy
-			 */
 			case 2:
 			{
 				bean = new ShowSpecBean();
@@ -86,9 +83,6 @@ public class ShowSpecServlet extends HttpServlet
 				request.getRequestDispatcher("znajdzLekarza.jsp").forward(request, response);
 				break;
 			}
-			/**
-			 * sluzy do tworzenia formularzu wizyty
-			 */
 			case 3:
 			{	
 				if(request.getParameter("login").equals("null") && request.getParameter("type").equals("null"))
@@ -97,7 +91,7 @@ public class ShowSpecServlet extends HttpServlet
 					request.setAttribute("rekordy","Tylko zalogowani uzytkownicy moga korzystac z opcji \" Umow Wizyte \"");
 					request.getRequestDispatcher("login.jsp").forward(request, response);		
 				}
-				else if( request.getParameter("type").equals("Specjalista"))
+				else if(request.getParameter("type").equals("Specjalista"))
 				{
 					request.setAttribute("mode", "2");
 					request.setAttribute("rekordy","Zaloguj sie jako Pacjent aby skorzystac z opcji \" Umow Wizyte \"");
@@ -119,7 +113,6 @@ public class ShowSpecServlet extends HttpServlet
 			case 4:
 			{
 				bean = new ShowSpecBean();
-				
 				
 				if(bean.zapiszDoBazy(request.getParameter("PESEL"),Integer.parseInt(request.getParameter("id_specjalisty")),request.getParameter("typWizyty")
 						,request.getParameter("miejsceWizyty"),request.getParameter("dataWizyty"),request.getParameter("textarea")))

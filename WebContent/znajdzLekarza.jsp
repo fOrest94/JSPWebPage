@@ -31,15 +31,16 @@
 	    	{
 	        	if(cookie[i].getName().equals("userBean"))
 	       		{
+	        		System.out.println("LOGIN TO: "+cookie[i].getValue());
 	        		login = cookie[i].getValue();
 	        		sesja++;
 	        	}
 	        	else if(cookie[i].getName().equals("type") )
 	       		{
+	        		System.out.println("TYP UZYTKOWNIKA "+cookie[i].getValue());
 	        		type = cookie[i].getValue();
 	        		sesja++;
 	        	}
-	        	System.out.println(cookie[i].getValue()+"*"+cookie[i].getName()+"**");
 	    	}
 	    	if(sesja == 2)
 	    	{

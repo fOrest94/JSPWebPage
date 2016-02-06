@@ -26,11 +26,13 @@
 	    	{
 	        	if(cookie[i].getName().equals("userBean"))
 	       		{
+	        		System.out.println("LOGIN TO: "+cookie[i].getValue());
 	        		login = cookie[i].getValue();
 	        		sesja++;
 	        	}
 	        	else if(cookie[i].getName().equals("type") )
 	       		{
+	        		System.out.println("TYP UZYTKOWNIKA "+cookie[i].getValue());
 	        		type = cookie[i].getValue();
 	        		sesja++;
 	        	}
@@ -110,7 +112,7 @@
 							if(request.getParameter("typeOfUser").equals("admin"))
 							{%>
 								<form action="userProfile" method="post">
-								<input type="hidden" value="4" name="mode">
+								<input type="hidden" value="3" name="mode">
 								<input type="hidden" value=<%= request.getParameter("login") %> name="login">
 								<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
 								<input type="submit" class="ver_menu" value="Lista uzytkownikow"/>
@@ -128,11 +130,10 @@
 				<div class="user_profil_right_side">
 					<div class="profile_content">
 					<%	
-						
 						if(Integer.valueOf(request.getParameter("mode")) == 2)
 						{
 							ArrayList<String> rekordy = new ArrayList<String>();
-						
+							System.out.println("tu powin byc");
 							if((request.getAttribute("label").equals("Pacjent") || request.getAttribute("label").equals("admin")) && request.getAttribute("label")!=null)
 							{	
 								if(request.getAttribute("rekordy") != null)
@@ -213,7 +214,9 @@
 										{
 											%>
 											<form action="edytujWizyte" method="post">
-											<input type="hidden" value="3" name="mode">
+											<input type="hidden" value="1" name="mode">
+											<input type="hidden" value=<%= request.getParameter("login") %> name="login">
+											<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
 											<div class="viewWizyta_ID"><input type="checkbox" name="id_wizyty" value="<%=listaWizyt.get(i)%>"></div>
 											<%
 											licznik++;
@@ -268,7 +271,10 @@
 										{
 											%>
 											<form action="edytujWizyte" method="post">
-											<input type="hidden" value="3" name="mode">
+											<input type="hidden" value="1" name="mode">
+											<input type="hidden" value="wizyta" name="whatToDelete">
+											<input type="hidden" value=<%= request.getParameter("login") %> name="login">
+											<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
 											<div class="viewWizyta_ID"><input type="checkbox" name="id_wizyty" value="<%=listaWizyt.get(i)%>"></div>
 											<%
 											licznik++;
@@ -287,13 +293,14 @@
 						}
 						else if(Integer.valueOf(request.getParameter("mode")) == 0)
 						{
-							%><div class="profile_content"><%
-							%>
+							%><div class="profile_content">
 							<div class="error">${infoMess}</div>
 							<div class="part_left">
 								<form action="userProfile" method="post">
 								<input type="hidden" value="0" name="mode">
 								<input type="hidden" value="zmienHaslo" name="changeSet">
+								<input type="hidden" value=<%= request.getParameter("login") %> name="login">
+								<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
 								<div class="textSett">Podaj stare haslo:</div>
 								<input type="password" name="oldPass"/>
 	            				<div class="textSett">Podaj nowe haslo:</div>
@@ -307,6 +314,8 @@
 								<form action="userProfile" method="post">
 								<input type="hidden" value="0" name="mode">
 								<input type="hidden" value="zmienLogin" name="changeSet">
+								<input type="hidden" value=<%= request.getParameter("login") %> name="login">
+								<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
 	            				<div class="textSett">Podaj nowy login:</div>
 	            				<input type="password" name="newLogin"/><br>
 								<input type="submit" class="bottomSett" value="Zmien login"/>
@@ -314,6 +323,8 @@
 								<form action="userProfile" method="post">
 								<input type="hidden" value="0" name="mode">
 								<input type="hidden" value="zmienEmail" name="changeSet">
+								<input type="hidden" value=<%= request.getParameter("login") %> name="login">
+								<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
 								<div class="textSett">Podaj nowy adres email:</div>
 	            				<input type="text" name="newEmail"/><br>
 								<input type="submit" class="bottomSett" value="Zmien email"/>
@@ -321,10 +332,10 @@
 							</div>
 							<% 
 						}
-						else if(Integer.valueOf(request.getParameter("mode")) == 4)
+						else if(Integer.valueOf(request.getParameter("mode")) == 3)
 						{%>
 							<form action="typUsera" method="post">
-							<input type="hidden" value="4" name="mode">
+							<input type="hidden" value="3" name="mode">
 							<input type="hidden" value=<%= request.getParameter("login") %> name="login">
 							<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
 								Pokaz liste: 
@@ -333,9 +344,11 @@
 										<option value="Pacjent">Pacjent</option>
 								 		<option value="Specjalista">Specjalista</option>
 								</select>
-							</form><br>
+							</form>
+							<div class="error">${infoMess}</div>
+							<br>
 							<%
-							if(request.getAttribute("listOfUsers") != null)
+							if(request.getAttribute("listOfUsers") != null && request.getAttribute("typ") != null)
 							{
 									ArrayList<String> rekordy = new ArrayList<String>();
 									rekordy = (ArrayList<String>) request.getAttribute("listOfUsers");
@@ -362,7 +375,10 @@
 											%>
 											<form action="edytujWizyte" method="post">
 											<input type="hidden" value="3" name="mode">
-											<div class="viewWizyta_ID"><input type="checkbox" name="id_wizyty" value="<%=rekordy.get(i)%>"></div>
+											<input type="hidden" value=<%= request.getParameter("login") %> name="login">
+											<input type="hidden" value=<%= request.getParameter("typeOfUser") %> name="typeOfUser">
+											<input type="hidden" value=<%= request.getAttribute("typ") %> name="typSearch">
+											<div class="viewWizyta_ID"><input type="checkbox" name="id_usera" value="<%=rekordy.get(i)%>"></div>
 											<%
 											licznik++;
 											continue;

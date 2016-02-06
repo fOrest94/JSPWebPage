@@ -20,11 +20,9 @@ public class Database
 	
 	public boolean ladujSterownik() 
 	{
-		System.out.print("Sprawdzanie sterownika:");
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			System.out.print(" Sterownik OK");
 			return true;
 		}
 		catch (Exception e) 
@@ -35,7 +33,6 @@ public class Database
 	
 	public Connection connectToDatabase(String adress, String dataBaseName, String userName, String password) 
 	{
-		System.out.print("\nLaczenie z baza danych:");
 		String baza = "jdbc:mysql://" + adress + "/" + dataBaseName;
 		java.sql.Connection connection = null;
 		
@@ -45,7 +42,7 @@ public class Database
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println("Blad przy ladowaniu sterownika bazy!");
+			System.out.println("Blad przy laczeniu z baza!");
 			System.exit(1);
 		}
 		return connection;
@@ -68,6 +65,7 @@ public class Database
 	{
 		try
 		{
+			System.out.println(zapytanie_sql);
 			statement.executeUpdate(zapytanie_sql);
 			return true;
 		}
@@ -92,26 +90,11 @@ public class Database
 		}
 	}
 	
-	public boolean pobierzZBazy(Statement statement, String zapytanie_sql)
-	{
-		try
-		{
-			statement.executeUpdate(zapytanie_sql);
-			return true;
-		}
-		catch (SQLException e) 
-		{
-			System.out.println("metoda nie chodzi");
-			return false;
-		}
-	}
-	
-	public ResultSet executeQuery(Statement state, String zapytanie_sql) 
+	public ResultSet executeQuery(Statement statement, String zapytanie_sql) 
 	{
 		try 
 		{
-			
-			return state.executeQuery(zapytanie_sql);
+			return statement.executeQuery(zapytanie_sql);
 		} 
 		catch (SQLException e) 
 		{
