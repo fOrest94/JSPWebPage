@@ -1,0 +1,19 @@
+<body ng-app="mainModule" ng-controller="NavigationCtrl">
+<div class="container" ng-controller="ReservationCtrl">
+    <div class="form-group">
+        <div class="col-sm-6">
+            <input ng-model="departureDate" type="text"
+                   datepicker-popup="yyyy-MM-dd" datepickerOptions="dateOptions"
+                   is-open="false" ng-click="data.isOpen = true"
+                   class="validate form-control" READONLY required>
+        </div>
+    </div>
+</div>
+<!-------------------JAVASCRIPT------------------->
+<script src="js/shared/angular.min.js"></script>
+<script src="js/shared/jquery-1.11.3.min.js"></script>
+<script src="js/shared/bootstrap.min.js"></script>
+<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+<script src="js/mainModule.js"></script>
+<script src="js/controllers/NavigationCtrl.js"></script>
+</body>
