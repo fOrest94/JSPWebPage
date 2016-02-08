@@ -286,7 +286,7 @@ ol > li:hover
 .user_profil_left_side .up
 {
 	height: 260px;
-	background-color: #f0f0f0;
+	background-image: url("D:/Apki Java 5 semestr/WebApplication/WebContent/webImages/no_background_photo.jpg"); 
 }
 .user_profil_left_side .pictureField
 {
@@ -466,7 +466,8 @@ ol > li:hover
 .show_spec_left_side .up
 {
 	height: 220px;
-	background-color: #ffffff;
+	
+	background-image: url("D:/Apki Java 5 semestr/WebApplication/WebContent/webImages/no_background_photo.jpg"); 
 }
 
 .show_spec_left_side .down

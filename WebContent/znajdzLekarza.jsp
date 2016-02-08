@@ -178,7 +178,7 @@
 					else if(Integer.valueOf(request.getParameter("mode")) == 2)
 					{%>
 						<div class = "show_spec_left_side">
-							<div class = "up">ZDJECIE</div>
+							<div class = "up"></div>
 							<div class = "down">
 								<form action="setWizyta" method = "post">
 								<input type="hidden" value="3" name="mode"/>
